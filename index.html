@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8"/>
@@ -13,22 +13,22 @@
      TOKEN SYSTEM — LIGHT & DARK
   ───────────────────────────────────────── */
   :root {
-    --bg:          #f8fafc;
-    --bg2:         #e2e8f0;
-    --surface:     #ffffff;
-    --ink:         #0f172a;
-    --ink2:        #475569;
-    --muted:       #64748b;
-    --line:        rgba(15, 23, 42, 0.08);
+    --bg:          #F5F0E8;
+    --bg2:         #EDE8DE;
+    --surface:     #FAF7F2;
+    --ink:         #1A1612;
+    --ink2:        #4A4540;
+    --muted:       #7A7570;
+    --line:        rgba(26, 22, 18, 0.09);
     --accent:      #059669;
     --accent2:     #2563eb;
     --accent-soft: #d1fae5;
     --amber:       #d97706;
     --amber-soft:  #fef3c7;
-    --hover-bg:    #f1f5f9;
-    --glass-bg:    rgba(248, 250, 252, 0.55);
-    --glass-border:rgba(15, 23, 42, 0.06);
-    --shadow-card: 0 12px 40px -10px rgba(5, 150, 105, 0.08);
+    --hover-bg:    #EDE8DE;
+    --glass-bg:    rgba(245, 240, 232, 0.72);
+    --glass-border:rgba(26, 22, 18, 0.08);
+    --shadow-card: 0 12px 40px -10px rgba(5, 150, 105, 0.10);
     --nav-h:       64px;
     --f-display:   'Outfit', sans-serif;
     --f-body:      'Plus Jakarta Sans', sans-serif;
@@ -122,7 +122,7 @@
     height:var(--nav-h);
     display:flex;align-items:center;justify-content:center;
     padding:0 24px;
-    margin-bottom: -16px; /* Offset for sticky top */
+    margin-bottom: -16px;
     pointer-events:none;
   }
   /* Glass pill */
@@ -134,66 +134,95 @@
     border-radius:100px;
     backdrop-filter:blur(32px) saturate(190%);
     -webkit-backdrop-filter:blur(32px) saturate(190%);
-    box-shadow: 0 4px 24px -6px rgba(0,0,0,.15);
+    box-shadow: 0 4px 24px -6px rgba(0,0,0,.15), 0 1px 0 rgba(255,255,255,.25) inset;
     padding:8px 12px 8px 24px;
     max-width:840px;width:100%;
-    transition:box-shadow .3s ease, background var(--transition);
+    transition:box-shadow .35s ease, background var(--transition), transform .25s ease;
+  }
+  .nav-pill:hover{
+    box-shadow: 0 8px 32px -6px rgba(0,0,0,.22), 0 1px 0 rgba(255,255,255,.25) inset;
   }
   [data-theme="dark"] .nav-pill{
-    box-shadow: 0 4px 24px -6px rgba(0,0,0,.3);
+    box-shadow: 0 4px 24px -6px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.06) inset;
   }
   .nav-logo{
     font-family:var(--f-display);font-size:20px;font-weight:800;
     background: linear-gradient(135deg, var(--accent), var(--accent2));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
     letter-spacing:-.04em;
     flex-shrink:0;margin-right:12px;
-    transition:transform .3s ease;display:inline-block;
+    transition:transform .35s cubic-bezier(.34,1.56,.64,1);display:inline-block;
   }
-  .nav-logo:hover{transform:rotate(-6deg) scale(1.08)}
-  .nav-links{display:flex;align-items:center;gap:8px;flex:1;justify-content:center}
+  .nav-logo:hover{transform:rotate(-8deg) scale(1.12)}
+  .nav-links{display:flex;align-items:center;gap:4px;flex:1;justify-content:center}
   .nav-links a{
     font-size:14px;font-weight:600;color:var(--ink2);
-    padding:8px 16px;border-radius:100px;
-    transition:background .2s,color .2s;
+    padding:8px 14px;border-radius:100px;
+    transition:background .22s,color .22s,transform .22s;
+    position:relative;
   }
-  .nav-links a:hover{background:var(--accent-soft);color:var(--accent)}
-  .nav-right{display:flex;align-items:center;gap:12px}
+  .nav-links a:hover{background:var(--accent-soft);color:var(--accent);transform:translateY(-1px)}
+  .nav-links a.active{background:var(--accent-soft);color:var(--accent)}
+  .nav-right{display:flex;align-items:center;gap:10px}
   /* Theme toggle */
   .theme-btn{
     width:38px;height:38px;border-radius:50%;
     border:1px solid var(--line);background:var(--surface);
     display:flex;align-items:center;justify-content:center;
-    color:var(--ink);transition:background .2s,transform .2s;
+    color:var(--ink);transition:background .25s,transform .4s cubic-bezier(.34,1.56,.64,1),border-color .25s;
     flex-shrink:0;
   }
-  .theme-btn:hover{background:var(--hover-bg);transform:rotate(20deg)}
+  .theme-btn:hover{background:var(--hover-bg);transform:rotate(30deg) scale(1.1);border-color:var(--accent)}
   .theme-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   .nav-cta{
     font-size:14px;font-weight:700;
     padding:10px 22px;border-radius:100px;
     background:var(--accent);color:#fff;
-    transition:background .2s,transform .2s,box-shadow .2s;
-    box-shadow:0 4px 14px rgba(16, 185, 129, .25);white-space:nowrap;
+    transition:background .25s,transform .25s,box-shadow .25s;
+    box-shadow:0 4px 14px rgba(16, 185, 129, .28);white-space:nowrap;
   }
-  .nav-cta:hover{background:var(--accent2);transform:translateY(-1px);box-shadow:0 6px 20px rgba(59, 130, 246, .35)}
-  /* Mobile */
-  .hamburger{display:none;flex-direction:column;gap:5px;padding:6px;border-radius:8px;pointer-events:auto;}
-  .hamburger span{display:block;width:20px;height:2px;background:var(--ink);border-radius:2px;transition:.3s}
+  .nav-cta:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 6px 20px rgba(59, 130, 246, .38)}
+  /* Mobile hamburger */
+  .hamburger{display:none;flex-direction:column;gap:5px;padding:8px;border-radius:10px;pointer-events:auto;
+    transition:background .2s;
+  }
+  .hamburger:hover{background:var(--hover-bg)}
+  .hamburger span{
+    display:block;width:20px;height:2px;background:var(--ink);border-radius:2px;
+    transition:transform .3s cubic-bezier(.34,1.56,.64,1), opacity .25s ease;
+  }
   .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-  .hamburger.open span:nth-child(2){opacity:0}
+  .hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
   .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  /* Mobile menu — animated slide-in */
   .nav-mobile{
-    display:none;flex-direction:column;
-    position:fixed;top:calc(var(--nav-h) + 16px);left:16px;right:16px;
-    background:var(--glass-bg); border-radius: 20px;
-    backdrop-filter:blur(32px); border: 1px solid var(--glass-border);
-    padding:20px;gap:0;z-index:9998; box-shadow: 0 10px 40px rgba(0,0,0,.2);
+    display:flex;flex-direction:column;
+    position:fixed;top:calc(var(--nav-h) + 24px);left:16px;right:16px;
+    background:var(--glass-bg); border-radius: 24px;
+    backdrop-filter:blur(40px) saturate(180%); border: 1px solid var(--glass-border);
+    padding:12px;gap:0;z-index:9998;
+    box-shadow: 0 16px 48px rgba(0,0,0,.18);
+    opacity:0;transform:translateY(-16px) scale(.96);
+    visibility:hidden;
+    transition:opacity .3s ease, transform .32s cubic-bezier(.34,1.56,.64,1), visibility 0s .32s;
+    pointer-events:none;
   }
-  .nav-mobile.open{display:flex}
-  .nav-mobile a{font-size:16px;padding:14px 0;border-bottom:1px solid var(--line);color:var(--ink);font-weight:600}
-  .nav-mobile a:last-child{border:none}
+  .nav-mobile.open{
+    opacity:1;transform:translateY(0) scale(1);
+    visibility:visible;
+    transition:opacity .3s ease, transform .32s cubic-bezier(.34,1.56,.64,1), visibility 0s 0s;
+    pointer-events:auto;
+  }
+  .nav-mobile a{
+    font-size:16px;padding:14px 16px;border-radius:14px;
+    color:var(--ink);font-weight:600;
+    transition:background .2s,color .2s,transform .2s;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-mobile a:last-child{border-bottom:none}
+  .nav-mobile a:hover{background:var(--accent-soft);color:var(--accent);transform:translateX(4px)}
 
   /* ─────────────────────────────────────────
      HERO
@@ -248,9 +277,12 @@
   }
   .hero-name{
     font-family:var(--f-display);
-    font-size:clamp(56px,7.5vw,96px);
+    font-size:clamp(40px,6vw,80px);
     font-weight:800;line-height:.95;letter-spacing:-.04em;
-    color:var(--ink);min-height:96px;
+    color:var(--ink);
+    white-space:nowrap;
+    overflow:hidden;
+    min-height:1em;
   }
   .cursor-blink{display:inline-block;color:var(--accent);animation:blink .75s step-end infinite}
   .hero-role-row{
@@ -427,7 +459,7 @@
   .tl-line-prog{
     position:absolute;left:50%;top:0;transform:translateX(-50%);
     width:2px;pointer-events:none;z-index:1;
-    background:linear-gradient(to bottom,var(--accent),var(--accent2));
+    background:var(--accent);
     height:0%;transition:height .08s linear;
   }
   /* Item */
@@ -462,29 +494,37 @@
   /* Image — parallax 3D container */
   .tl-img-col{padding:8px 0; perspective: 1200px;}
   .tl-img-wrap{
-    border-radius:32px 8px 32px 8px; /* Organic Squircle shape */
+    border-radius:24px;
     overflow:hidden;
     border:1px solid var(--line);
     background: var(--bg2);
-    padding: 16px;
+    padding: 20px;
     box-shadow:var(--shadow-card);
-    aspect-ratio:16/11;
+    aspect-ratio:4/3;
     position:relative;
     transform-style:preserve-3d;
     will-change: transform;
     display:flex;align-items:center;justify-content:center;
+    transition:border-color .3s,box-shadow .3s,transform .3s;
+  }
+  /* GitHub-style card hover */
+  .tl-img-wrap:hover{
+    border-color:var(--accent);
+    box-shadow:0 12px 40px rgba(5,150,105,.18);
+    transform:translateY(-6px) scale(1.012);
   }
   .tl-img-wrap img{
     width:100%;height:100%;
-    object-fit:contain; /* Fix cropping */
+    object-fit:contain;
+    object-position:center center;
     border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    transition:transform .6s ease;
+    max-width:90%;max-height:90%;
+    transition:transform .5s ease, filter .3s ease;
     will-change:transform;
   }
-  /* Hover effect for image inside parallax */
-  .tl-img-col:hover img {
-    filter: brightness(1.05);
+  /* Brighten image on hover */
+  .tl-img-wrap:hover img {
+    filter: brightness(1.06) contrast(1.02);
   }
   
   /* Layout variants */
@@ -546,12 +586,12 @@
   .sb-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
   .sb-name{font-size:15px;font-weight:700;color:var(--ink)}
   .sb-pct{font-family:var(--f-mono);font-size:13px;font-weight:600;color:var(--muted)}
-  .sb-track{height:6px;background:var(--line);border-radius:100px;overflow:hidden}
+  .sb-track{height:5px;background:var(--line);border-radius:100px;overflow:hidden}
   .sb-fill{
     height:100%;
-    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    background:var(--accent);
     border-radius:100px;width:0%;
-    transition:width 1.2s cubic-bezier(.22,.68,0,1);
+    transition:width 1.3s cubic-bezier(.22,.68,0,1);
   }
 
   /* PART 2: Dual Tech Carousel */
@@ -560,50 +600,58 @@
     position:relative;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
+    /* Pause on hover applies to the whole wrap */
   }
+  .skills-carousel-wrap:hover .carousel-row{animation-play-state:paused}
+  /* Fade edges */
   .skills-carousel-wrap::before,.skills-carousel-wrap::after{
     content:'';position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none;
   }
   .skills-carousel-wrap::before{left:0;background:linear-gradient(to right,var(--bg),transparent)}
   .skills-carousel-wrap::after{right:0;background:linear-gradient(to left,var(--bg),transparent)}
   
-  .skills-track{
+  /* Each row is one seamless strip — cards repeated inline for infinite loop */
+  .carousel-row{
     display:flex;gap:20px;
     width:max-content;
   }
-  .track-left { animation:marqueeLeft 40s linear infinite; }
-  .track-right { animation:marqueeRight 40s linear infinite; }
-  .skills-track:hover{animation-play-state:paused}
+  /* Row 1 slides LEFT */
+  .carousel-row-1 { animation: marqueeLeft 50s linear infinite; }
+  /* Row 2 slides RIGHT (opposite direction) */
+  .carousel-row-2 { animation: marqueeRight 55s linear infinite; }
   
   .skill-logo-card{
     display:flex;flex-direction:row;align-items:center;justify-content:center;gap:14px;
-    width:200px;height:70px;border-radius:16px;
+    width:210px;height:76px;border-radius:16px;
     background:var(--surface);border:1px solid var(--line);
     flex-shrink:0;
-    transition:border-color .25s,transform .25s,box-shadow .25s,background var(--transition);
+    transition:border-color .22s,transform .22s,box-shadow .22s,background var(--transition);
     cursor:default;
+    padding:0 16px;
   }
   .skill-logo-card:hover{
-    border-color:var(--accent);transform:translateY(-4px);
+    border-color:var(--accent);transform:translateY(-3px);
     box-shadow:var(--shadow-card);
   }
-  .skill-logo-card svg{width:32px;height:32px}
-  .skill-logo-card span{font-family:var(--f-body);font-size:16px;font-weight:700;color:var(--ink);letter-spacing:0}
+  .skill-logo-card img{width:30px;height:30px;flex-shrink:0;object-fit:contain;}
+  .skill-logo-card span{font-family:var(--f-body);font-size:15px;font-weight:700;color:var(--ink);letter-spacing:0;white-space:nowrap}
+  /* Vercel icon is black — invert to white in dark mode */
+  [data-theme="dark"] .icon-invert{filter:invert(1) brightness(2);}
 
   /* PART 3: Keyword pills */
   .skills-keywords{
-    display:flex;flex-wrap:wrap;gap:12px;justify-content:center;
-    border-top:1px solid var(--line);padding-top:48px;
+    display:flex;flex-wrap:wrap;gap:10px;justify-content:center;
+    border-top:1px solid var(--line);padding-top:44px;
   }
   .kw-pill{
-    font-family:var(--f-mono);font-size:13px;font-weight:600;
-    padding:8px 20px;border-radius:100px;
+    font-family:var(--f-mono);font-size:12px;font-weight:600;
+    padding:7px 18px;border-radius:100px;
     border:1px solid var(--line);color:var(--muted);
     background:var(--surface);
-    transition:background .2s,color .2s,border-color .2s;
+    transition:background .2s,color .2s,border-color .2s,transform .2s;
   }
-  .kw-pill:hover{background:var(--accent-soft);color:var(--accent);border-color:var(--accent)}
+  .kw-pill:hover{background:var(--accent-soft);color:var(--accent);border-color:var(--accent);transform:translateY(-2px)}
 
   /* ─────────────────────────────────────────
      EDUCATION
@@ -729,37 +777,70 @@
   /* ─────────────────────────────────────────
      RESPONSIVE
   ───────────────────────────────────────── */
+
+  /* ── Tablets (768–1023px) ── */
   @media(max-width:1023px){
-    .hero-inner{grid-template-columns:1fr;gap:40px}
-    .hero-visual{height:360px}
-    .about-grid{grid-template-columns:1fr;gap:56px}
+    .section{padding:80px 0}
+    .hero-inner{grid-template-columns:1fr;gap:40px;text-align:center}
+    .hero-label,.hero-role-row,.hero-ctas,.hero-scroll{justify-content:center}
+    .hero-tagline{margin-left:auto;margin-right:auto}
+    .hero-visual{height:320px;margin:0 auto}
+    .about-grid{grid-template-columns:1fr;gap:48px}
     .about-stat-card.asc-2{display:none}
-    .about-img-frame{max-height:460px;aspect-ratio:4/3}
-    .tl-line-bg,.tl-line-prog{left:32px;transform:none}
-    .tl-item{grid-template-columns:48px 1fr;gap:0}
+    .about-img-frame{max-height:400px;aspect-ratio:4/3;margin:0 auto;max-width:420px}
+    /* Timeline stacks vertically */
+    .tl-line-bg,.tl-line-prog{left:28px;transform:none}
+    .tl-item{grid-template-columns:40px 1fr;gap:0}
     .tl-left .tl-card-col,.tl-right .tl-card-col{grid-column:2}
     .tl-left .tl-dot-col,.tl-right .tl-dot-col{grid-column:1}
-    .tl-left .tl-img-col,.tl-right .tl-img-col{grid-column:2;padding:20px 0 0}
+    .tl-left .tl-img-col,.tl-right .tl-img-col{grid-column:2;padding:16px 0 0}
     .tl-left .tl-dot-col,.tl-right .tl-dot-col{grid-row:1}
     .tl-left .tl-card-col,.tl-right .tl-card-col{grid-row:1}
     .tl-left .tl-img-col,.tl-right .tl-img-col{grid-row:2}
     .skills-bars-grid{grid-template-columns:1fr}
     .edu-grid{grid-template-columns:1fr}
     .nss-card{grid-column:1}
+    .cert-grid{grid-template-columns:repeat(2,1fr)}
   }
+
+  /* ── Mobile (≤767px) ── */
   @media(max-width:767px){
-    .section-title{font-size:40px}
-    .hero-name{font-size:clamp(44px,10vw,64px)}
+    .container{padding:0 20px}
+    .section{padding:64px 0}
+    .section-title{font-size:clamp(32px,9vw,48px)}
+    .hero-name{
+      font-size:clamp(32px,9vw,52px);
+      white-space:nowrap;
+    }
     .nav-links,.nav-cta{display:none}
     .hamburger{display:flex}
     .hv-chip{display:none}
-    .hero-visual{height:300px}
-    .tl-line-bg,.tl-line-prog{left:24px}
-    .tl-item{grid-template-columns:32px 1fr}
+    .hero-visual{height:260px}
+    .tl-line-bg,.tl-line-prog{left:20px}
+    .tl-item{grid-template-columns:28px 1fr;margin-bottom:56px}
+    .tl-card{padding:20px}
+    .card-name{font-size:20px}
+    .about-grid{gap:32px}
+    .edu-grid{gap:16px}
+    .cert-grid{grid-template-columns:1fr}
+    .socials-row{gap:10px}
+    .soc-link{padding:10px 14px;font-size:14px}
+    .contact-heading{font-size:clamp(32px,10vw,56px)}
   }
+
+  /* ── Small phones (≤480px) ── */
   @media(max-width:480px){
-    .hero-ctas{flex-direction:column}
+    .hero-ctas{flex-direction:column;align-items:stretch}
     .btn-fill,.btn-ghost{width:100%;justify-content:center}
+    .nav-pill{padding:6px 10px 6px 18px}
+    .hero-name{font-size:clamp(28px,9vw,44px)}
+    .hero-tagline{font-size:16px}
+    .skill-logo-card{width:150px;height:56px;gap:8px}
+    .skill-logo-card span{font-size:13px}
+    .skill-logo-card svg{width:22px;height:22px}
+    .tl-card{padding:16px}
+    .tl-img-wrap{aspect-ratio:16/10}
+    .contact-sub{font-size:16px}
   }
   </style>
 </head>
@@ -910,7 +991,7 @@
     <div class="about-grid">
       <div class="about-photo-col rl">
         <div class="about-img-frame">
-          <img src="./assets/My face image.png" alt="Ratish Patil — AI Engineer"/>
+          <img src="portfolio-web/assets/My face image.png" alt="Ratish Patil — AI Engineer"/>
         </div>
         <div class="about-stat-card asc-2 reveal" data-delay="200">
           <div class="asc-num">5+</div>
@@ -1012,7 +1093,7 @@
         <div class="tl-dot-col" aria-hidden="true"><div class="tl-dot"></div></div>
         <div class="tl-img-col rr">
           <div class="tl-img-wrap parallax-img">
-            <img src="./assets/Krishisetu asset.png" alt="KrishiSetu Platform" loading="lazy"/>
+            <img src="portfolio-web/assets/Krishisetu asset.png" alt="KrishiSetu Platform" loading="lazy"/>
           </div>
         </div>
       </div>
@@ -1021,7 +1102,7 @@
       <div class="tl-item tl-right">
         <div class="tl-img-col rl">
           <div class="tl-img-wrap parallax-img">
-            <img src="./assets/Smart_Sight_Front.jpeg" alt="Smart Sight Device" loading="lazy"/>
+            <img src="portfolio-web/assets/Smart_Sight_Front.jpeg" alt="Smart Sight Device" loading="lazy"/>
           </div>
         </div>
         <div class="tl-dot-col" aria-hidden="true"><div class="tl-dot"></div></div>
@@ -1100,13 +1181,14 @@
       <div class="tl-item tl-right">
         <div class="tl-img-col rl">
           <div class="tl-img-wrap parallax-img">
-            <img src="./assets/IOT tracker asset.png" alt="IoT Vehicle Tracker" loading="lazy"/>
+            <img src="portfolio-web/assets/IOT tracker asset.png" alt="IoT Vehicle Tracker" loading="lazy"/>
           </div>
         </div>
         <div class="tl-dot-col" aria-hidden="true"><div class="tl-dot"></div></div>
         <div class="tl-card-col rr">
           <div class="tl-card">
             <div class="card-tags-row">
+        <div class="card-tags-row">
               <span class="ctag">RASPBERRY PI 4B</span><span class="ctag">NEO-M8N GPS</span>
               <span class="ctag">FIREBASE</span><span class="ctag">SYSTEMD</span>
             </div>
@@ -1171,27 +1253,47 @@
       </div>
     </div>
 
-    <!-- PART 2: Dual Tech Carousel -->
+    <!-- PART 2: Dual Tech Carousel — Simple Icons CDN (simpleicons.org) -->
     <div class="skills-carousel-wrap">
-      <!-- Track 1: Moving Left -->
-      <div class="skills-track track-left" id="track-1">
-        <div class="skill-logo-card"><svg viewBox="0 0 128 128"><path fill="#3871A1" d="M63.7 1.1C30.2 1.1 32.3 15 32.3 15l0 14.4H64.3V33H19.9S1 30.8 1 64.5s16.6 32.6 16.6 32.6H27V81.6s-0.6-16.6 16.3-16.6h28s15.8 0.2 15.8-15.3V19.5C87.1 19.5 97.2 1.1 63.7 1.1zM46.7 10.1c2.9 0 5.2 2.3 5.2 5.2s-2.3 5.2-5.2 5.2-5.2-2.3-5.2-5.2S43.8 10.1 46.7 10.1z"/><path fill="#FDD040" d="M64.4 127C97.9 127 95.8 113.1 95.8 113.1l0-14.4H63.8V95.1h44.4S127 97.3 127 63.6 110.4 31 110.4 31H101v15.5s0.6 16.6-16.3 16.6h-28S41 62.9 41 78.4v30.1C41 108.5 30.9 127 64.4 127zM81.4 118c-2.9 0-5.2-2.3-5.2-5.2s2.3-5.2 5.2-5.2 5.2 2.3 5.2 5.2S84.3 118 81.4 118z"/></svg><span>Python</span></div>
-        <div class="skill-logo-card"><svg viewBox="0 0 128 128" fill="none"><rect width="128" height="128" rx="24" fill="#1A6B42"/><path d="M32 80l20-32 20 32M72 48l16 32" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="96" cy="80" r="6" fill="white"/></svg><span>LangChain</span></div>
-        <div class="skill-logo-card"><svg viewBox="0 0 128 128"><path fill="#FF6F00" d="M64 5.4L5.4 39.2v47.6L64 120.6l58.6-33.8V39.2L64 5.4zm0 10.4l48.6 28.1v38.2L64 110.2 15.4 82.1V43.9L64 15.8z"/><path fill="#FF6F00" d="M64 30.2L35.8 46.5v33.1L64 95.9l28.2-16.3V46.5L64 30.2zm0 9.5l19.2 11.1V79L64 90.1 44.8 79V50.8L64 39.7z"/></svg><span>TensorFlow</span></div>
-        <div class="skill-logo-card"><svg viewBox="0 0 128 128" fill="none"><rect width="128" height="128" rx="24" fill="#F7931E"/><path d="M24 100c0-22 18-40 40-40s40 18 40 40" stroke="white" stroke-width="8" stroke-linecap="round"/><circle cx="64" cy="52" r="16" fill="white"/></svg><span>Scikit-learn</span></div>
-        <div class="skill-logo-card"><svg viewBox="0 0 128 128"><circle cx="64" cy="64" r="52" fill="none" stroke="#3FE040" stroke-width="10"/><circle cx="64" cy="34" r="16" fill="#3FE040"/><circle cx="38" cy="78" r="16" fill="#3FE040"/><circle cx="90" cy="78" r="16" fill="#3FE040"/></svg><span>OpenCV</span></div>
-        <div class="skill-logo-card"><svg viewBox="0 0 128 128"><path fill="#2396ED" d="M124.8 52.1c-4.3-2.5-9.9-2.8-14.3-.8-.6-4.6-3.7-8.6-7.8-11l-1.6-.9-1 1.5c-2 3.1-2.8 7.3-2.6 10.9.2 2.7 1.1 5.5 2.8 7.7-1.3.7-2.7 1.7-4 2.2-2.6 1-5.4 1.5-8.2 1.5H3.9l-.2 1.3c-.6 5.3.2 10.7 2.6 15.5l1 2 .2.4c7.1 12.3 20.1 17.5 34 17.5 27.3 0 49.8-12.2 59.9-38.2 6.9.4 13.9-1.7 17.3-8.3l.9-1.7-1.8-1.1zm-75.6.2h-9.1v9.1h9.1v-9.1zm11.3 0H51.4v9.1h9.1v-9.1zm11.3 0h-9.1v9.1h9.1v-9.1zm11.3 0h-9.1v9.1h9.1v-9.1zm-34 11.3h-9.1v9.1h9.1v-9.1zm11.3 0H51.4v9.1h9.1v-9.1zm11.3 0h-9.1v9.1h9.1v-9.1zm-22.5-22.5H40.2v9.1h9.1v-9.1zm11.3 0H51.4v9.1h9.1v-9.1zm11.3 0h-9.1v9.1h9.1v-9.1z"/></svg><span>Docker</span></div>
-        <div class="skill-logo-card"><svg viewBox="0 0 128 128"><path fill="#F34F29" d="M124.737 58.378L69.621 3.264c-3.172-3.174-8.32-3.174-11.497 0L46.68 14.71l14.518 14.518c3.375-1.139 7.243-.375 9.932 2.314 2.703 2.706 3.461 6.607 2.294 9.993l13.992 13.993c3.385-1.167 7.292-.413 9.994 2.295 3.78 3.777 3.78 9.9 0 13.679a9.673 9.673 0 01-13.683 0 9.677 9.677 0 01-2.105-10.521L68.574 47.933l-.002 34.341a9.708 9.708 0 012.559 1.828c3.778 3.777 3.778 9.898 0 13.683-3.779 3.777-9.904 3.777-13.679 0-3.778-3.785-3.778-9.905 0-13.683a9.65 9.65 0 013.167-2.11V47.333a9.581 9.581 0 01-3.167-2.111c-2.862-2.86-3.551-7.06-2.083-10.576L40.895 20.164 3.264 57.796a8.133 8.133 0 000 11.499l55.117 55.117c3.17 3.17 8.317 3.17 11.488 0l54.869-54.867a8.135 8.135 0 000-11.167z"/></svg><span>Git</span></div>
+      <!-- Row 1: slides LEFT — cards duplicated inline for seamless loop -->
+      <div class="carousel-row carousel-row-1">
+        <div class="skill-logo-card"><img src="https://cdn.simpleicons.org/python/3776AB" alt="Python"/><span>Python</span></div>
+        <div class="skill-logo-card"><img src="https://cdn.simpleicons.org/tensorflow/FF6F00" alt="TensorFlow"/><span>TensorFlow</span></div>
+        <div class="skill-logo-card"><img src="https://cdn.simpleicons.org/pytorch/EE4C2C" alt="PyTorch"/><span>PyTorch</span></div>
+        <div class="skill-logo-card"><img src="https://cdn.simpleicons.org/scikitlearn/F7931E" alt="Scikit-learn"/><span>Scikit-learn</span></div>
+        <div class="skill-logo-card"><img src="https://cdn.simpleicons.org/opencv/5C3EE8" alt="OpenCV"/><span>OpenCV</span></div>
+        <div class="skill-logo-card"><img src="https://cdn.simpleicons.org/docker/2496ED" alt="Docker"/><span>Docker</span></div>
+        <div class="skill-logo-card"><img src="https://cdn.simpleicons.org/git/F05032" alt="Git"/><span>Git</span></div>
+        <div class="skill-logo-card"><img src="https://cdn.simpleicons.org/jupyter/F37626" alt="Jupyter"/><span>Jupyter</span></div>
+        <!-- duplicate for infinite loop -->
+        <div class="skill-logo-card" aria-hidden="true"><img src="https://cdn.simpleicons.org/python/3776AB" alt=""/><span>Python</span></div>
+        <div class="skill-logo-card" aria-hidden="true"><img src="https://cdn.simpleicons.org/tensorflow/FF6F00" alt=""/><span>TensorFlow</span></div>
+        <div class="skill-logo-card" aria-hidden="true"><img src="https://cdn.simpleicons.org/pytorch/EE4C2C" alt=""/><span>PyTorch</span></div>
+        <div class="skill-logo-card" aria-hidden="true"><img src="https://cdn.simpleicons.org/scikitlearn/F7931E" alt=""/><span>Scikit-learn</span></div>
+        <div class="skill-logo-card" aria-hidden="true"><img src="https://cdn.simpleicons.org/opencv/5C3EE8" alt=""/><span>OpenCV</span></div>
+        <div class="skill-logo-card" aria-hidden="true"><img src="https://cdn.simpleicons.org/docker/2496ED" alt=""/><span>Docker</span></div>
+        <div class="skill-logo-card" aria-hidden="true"><img src="https://cdn.simpleicons.org/git/F05032" alt=""/><span>Git</span></div>
+        <div class="skill-logo-card" aria-hidden="true"><img src="https://cdn.simpleicons.org/jupyter/F37626" alt=""/><span>Jupyter</span></div>
       </div>
-      <!-- Track 2: Moving Right -->
-      <div class="skills-track track-right" id="track-2">
-        <div class="skill-logo-card"><svg viewBox="0 0 128 128"><circle cx="64" cy="64" r="11.4" fill="#61DAFB"/><path d="M107.3 45.2c-2.2-.8-4.5-1.6-6.9-2.3.6-2.4 1.1-4.8 1.5-7.1 2.1-13.2-.2-22.5-6.6-26.1-1.9-1.1-4-1.6-6.4-1.6-7 0-15.9 5.2-24.9 13.9-9-8.7-17.9-13.9-24.9-13.9-2.4 0-4.5.5-6.4 1.6-6.4 3.7-8.7 13-6.6 26.1.4 2.3-.9 4.7-1.5-7.1-2.4-.7-4.7-1.4-6.9-2.3C8.2 50 1.4 56.6 1.4 64s6.9 14 18.3 18.8c2.2.8 4.5 1.6 6.9 2.3-.6 2.4-1.1 4.8-1.5 7.1-2.1 13.2.2 22.5 6.6 26.1 1.9 1.1 4 1.6 6.4 1.6 7.1 0 16-5.2 24.9-13.9 9 8.7 17.9 13.9 24.9 13.9 2.4 0 4.5-.5 6.4-1.6 6.4-3.7 8.7-13 6.6-26.1-.4-2.3-.9-4.7-1.5-7.1 2.4-.7 4.7-1.4 6.9-2.3 11.4-4.8 18.3-11.4 18.3-18.8s-6.8-14-18.2-18.8zM92.5 14.7c4.1 2.4 5.5 9.8 3.8 20.3-.3 2.1-.8 4.3-1.4 6.6-5.2-1.2-10.7-2-16.5-2.5-3.4-4.8-6.9-9.1-10.4-13 7.4-7.3 14.9-12.3 21-12.3 1.3 0 2.5.3 3.5.9zM81.3 74c-1.8 3.2-3.9 6.4-6.1 9.6-3.7.3-7.4.4-11.2.4-3.9 0-7.6-.1-11.2-.4-2.2-3.2-4.2-6.4-6-9.6-1.9-3.3-3.7-6.7-5.3-10 1.6-3.3 3.4-6.7 5.3-10 1.8-3.2 3.9-6.4 6.1-9.6 3.7-.3 7.4-.4 11.2-.4 3.9 0 7.6.1 11.2.4 2.2 3.2 4.2 6.4 6 9.6 1.9 3.3 3.7 6.7 5.3 10-1.7 3.3-3.4 6.6-5.3 10zm8.3-3.3c1.5 3.5 2.7 6.9 3.8 10.3-3.4.8-7 1.4-10.8 1.9 1.2-1.9 2.5-3.9 3.6-6 1.2-2.1 2.3-4.2 3.4-6.2zM64 97.8c-2.4-2.6-4.7-5.4-6.9-8.3 2.3-.1 4.6-.2 6.9-.2 2.3 0 4.6-.1 6.9-.2-2.2 2.9-4.5 5.7-6.9 8.3zm-18.6-15c-3.8-.5-7.4-1.1-10.8-1.9 1.1-3.3 2.3-6.8 3.8-10.3 1.1 2 2.2 4.1 3.4 6.1 1.2 2.2 2.4 4.1 3.6 6.1zm-7-25.5c-1.5-3.5-2.7-6.9-3.8-10.3 3.4-.8 7-1.4 10.8-1.9-1.2 1.9-2.5 3.9-3.6 6-1.2 2.1-2.3 4.2-3.4 6.2zM64 30.2c2.4 2.6 4.7 5.4 6.9 8.3-2.3-.1-4.6-.2-6.9-.2-2.3 0-4.6.1-6.9.2 2.2-2.9 4.5-5.7 6.9-8.3zm22.2 21l-3.6-6c3.8.5 7.4 1.1 10.8 1.9-1.1 3.3-2.3 6.8-3.8 10.3-1.1-2-2.2-4.1-3.4-6.2zM31.7 35c-1.7-10.5-.3-17.9 3.8-20.3 1-.6 2.2-.9 3.5-.9 6 0 13.5 4.9 21 12.3-3.5 3.8-7 8.2-10.4 13-5.8.5-11.3 1.4-16.5 2.5-.6-2.3-1-4.5-1.4-6.6zM7 64c0-4.7 5.7-9.7 15.7-13.4 2-.8 4.2-1.5 6.4-2.1 1.6 5 3.6 10.3 6 15.6-2.4 5.3-4.5 10.5-6 15.5C15.3 75.6 7 69.6 7 64zm28.5 49.3c-4.1-2.4-5.5-9.8-3.8-20.3.3-2.1.8-4.3 1.4-6.6 5.2 1.2 10.7 2 16.5 2.5 3.4 4.8 6.9 9.1 10.4 13-7.4 7.3-14.9 12.3-21 12.3-1.3 0-2.5-.3-3.5-.9zM96.3 93c1.7 10.5.3 17.9-3.8 20.3-1 .6-2.2.9-3.5.9-6 0-13.5-4.9-21-12.3 3.5-3.8 7-8.2 10.4-13 5.8-.5 11.3-1.4 16.5-2.5.6 2.3 1 4.5 1.4 6.6zm9-12.4c-2 .8-4.2 1.5-6.4 2.1-1.6-5-3.6-10.3-6-15.6 2.4-5.3 4.5-10.5 6-15.5 11.2 3.7 19.5 9.7 19.5 14.4 0 4.7-5.8 9.7-15.7 13.4z" fill="#61DAFB"/></svg><span>React</span></div>
-        <div class="skill-logo-card"><svg viewBox="0 0 128 128"><path fill="#83CD29" d="M112.771 30.334L68.674 4.729c-2.781-1.584-6.402-1.584-9.003 0L14.901 30.334C12.031 31.985 10 35.088 10 38.407v51.142c0 3.319 2.031 6.423 4.901 8.073l44.197 25.605c2.721 1.584 6.402 1.584 9.003 0L112.771 97.622c2.781-1.685 4.901-4.695 4.901-8.073V38.407c-.001-3.319-2.12-6.422-4.901-8.073zM64 88.731c-13.9 0-24.901-11.001-24.901-24.901 0-13.9 11.001-24.901 24.901-24.901 8.807 0 16.482 4.6 20.804 11.498l-10.442 6.007c-2.31-3.813-6.526-6.315-10.362-6.315-6.999 0-12.588 5.589-12.588 12.588 0 7.11 5.59 12.588 12.588 12.588 4.014 0 7.525-1.839 9.823-4.835l10.365 6.079c-4.322 7.015-12.054 11.192-20.188 11.192z"/></svg><span>Node.js</span></div>
-        <div class="skill-logo-card"><svg viewBox="0 0 128 128" fill="none"><rect width="128" height="128" rx="24" fill="#059669"/><path d="M72 24L40 72h32L56 104l48-56H72V24z" fill="white"/></svg><span>FastAPI</span></div>
-        <div class="skill-logo-card"><svg viewBox="0 0 128 128"><path fill="#FFA000" d="M7.6 101.4L29 12.2c.5-2.1 3.4-2.4 4.4-.4l21.8 40.8 6.7-12.8c1-1.9 3.7-1.9 4.7 0L120.4 101.4H7.6z"/><path fill="#F57F17" d="M7.6 101.4l52.2-57.8 21.8 40.8L7.6 101.4z"/><path fill="#FFCA28" d="M120.4 101.4H7.6L63.8 10.1c.9-1.5 3.1-1.5 4 0l52.6 91.3z" opacity=".5"/></svg><span>Firebase</span></div>
-        <div class="skill-logo-card"><svg viewBox="0 0 128 128"><path fill="#4285F4" d="M79.7 45.4H83l10.3-10.3.5-4.4C75.5 13 48.2 14.1 31.3 32.1c-4.6 5.2-8 11.4-10 18.1l3.7-.5 20.6-3.4 1.5-1.5c9.2-10.1 24.5-11.8 35.5-5.2l-2.9 5.8z"/><path fill="#EA4335" d="M96.5 50.2c-2.3-8.5-7.1-16.1-13.8-21.9l-14.3 14.3c6.5 5.3 10.2 13.3 10 21.7v2.7c7.5 0 13.6 6.1 13.6 13.6s-6.1 13.6-13.6 13.6H64.8l-2.7 2.8v16.3l2.7 2.7h13.6c19.4.1 35.2-15.5 35.3-34.9.1-11.8-5.7-22.9-15.2-31z"/><path fill="#34A853" d="M37.8 113.9H51.4V93.3H37.8c-.9 0-1.9-.2-2.7-.6l-3.7.5-10.4 10.3-.5 3.7c4.8 4.5 11.1 7 17.3 6.7z"/><path fill="#FBBC05" d="M37.8 44.1C18.5 44.2 3 59.8 3 79.1 3 89.6 7.7 99.4 15.5 106l15.1-15.1c-6.9-3.1-10-11.2-7-18.1 3.1-6.9 11.2-10 18.1-7 3.1 1.4 5.6 3.9 7 7l15.1-15.1c-6.6-8-16.5-12.7-27-12.6z"/></svg><span>GCP</span></div>
-        <div class="skill-logo-card"><svg viewBox="0 0 128 128"><path fill="#599636" d="M87.6 19c-2.2-5.8-5.4-10.5-9.5-14.3-.5-.5-1.4-.1-1.4.6 0 1.9.4 5.5-.3 8.8-1.8 8.1-10.2 13.5-15.8 19.2-7 7.2-11.1 15.1-11.6 24.8-.1 1.5-.1 3-.1 4.6 0 1.5.1 3 .3 4.5.3 3.9.9 7.6 2 11.1 4.7 14.8 17.3 25.3 29 31.5.6.3 1.1-.3.9-.9-1.5-4.8-2.6-11.3-1.8-16.1.5-2.7.9-5.7 1.4-8.5l.3-1.8c1.6-10.1 4-16.2 9.2-23.2 4.8-6.5 9.1-12 11.3-20.4 1.2-4.4 1.5-9.8 1.5-12.1 0-3.2-.4-6-1.4-7.8z"/><path fill="#6CAC48" d="M64.5 93.5s-.8 27.7-8.7 33.1c-2.1 1.4-.8 5.8 8.7 5.8 9.5 0 10.8-4.4 8.7-5.8-7.8-5.4-8.7-33.1-8.7-33.1z"/></svg><span>MongoDB</span></div>
-        <div class="skill-logo-card"><svg viewBox="0 0 128 128"><path fill="#336791" d="M97.7 17.1c-1-.5-2.1-.8-3.2-1-4.5-.8-9.4.3-13.5 2.4-3.7-5.7-9.7-9-16.3-9.5-7.6-.6-14.6 2.8-19.2 8.6-3.9-1.6-8.2-2.2-12.4-1.6-4.1.6-8 2.4-11 5.3-3.9 3.6-6.1 8.6-6.2 13.8-.1 3 .5 6 1.9 8.7-3.1 5.6-4.2 12-3.3 18.2.6 3.8 2.2 7.5 4.8 10.4 1.4 1.6 3.1 2.9 5 3.9.3 5.2 1.5 10.4 3.7 15.1 1.1 2.3 2.5 4.5 4.3 6.4 1.8 1.8 4 3.2 6.4 3.9 2.5.7 5.1.7 7.5-.1 1.4 1.7 3 3.2 4.9 4.4 2.2 1.3 4.6 2.1 7.2 2.2 2.5.1 5.1-.5 7.3-1.8 1.6-1 3-2.3 4.1-3.9 2.9.3 5.8.1 8.6-.9 2.5-.9 4.7-2.4 6.5-4.4 2.5-2.8 4-6.4 4.7-10.1.4-2.2.5-4.4.4-6.7 1-.5 1.9-1.1 2.7-1.8 2.4-1.9 4.3-4.5 5.3-7.5 1.5-4.4 1.3-9.2-.3-13.5 1.9-4 2.7-8.5 2.2-12.9-.4-4.3-2-8.5-4.7-11.9l-.5-.6zM70 111.4c-1.5.9-3.2 1.4-5 1.3-2.2-.1-4.3-1-5.9-2.4-.2-.2-.5-.4-.7 2.9-.4 5.8-1.4 8.2-3.1l.8-.6c1.1.6 2.2 1.2 3.3 1.8.9.5 1.8.9 2.7 1.4-.9.8-2 1.7-3.4 2.3z"/></svg><span>PostgreSQL</span></div>
+      <!-- Row 2: slides RIGHT — cards duplicated inline for seamless loop -->
+      <div class="carousel-row carousel-row-2">
+        <div class="skill-logo-card"><img src="https://cdn.simpleicons.org/react/61DAFB" alt="React"/><span>React</span></div>
+        <div class="skill-logo-card"><img src="https://cdn.simpleicons.org/nodedotjs/339933" alt="Node.js"/><span>Node.js</span></div>
+        <div class="skill-logo-card"><img src="https://cdn.simpleicons.org/fastapi/009688" alt="FastAPI"/><span>FastAPI</span></div>
+        <div class="skill-logo-card"><img src="https://cdn.simpleicons.org/firebase/DD2C00" alt="Firebase"/><span>Firebase</span></div>
+        <div class="skill-logo-card"><img src="https://cdn.simpleicons.org/googlecloud/4285F4" alt="GCP"/><span>GCP</span></div>
+        <div class="skill-logo-card"><img src="https://cdn.simpleicons.org/mongodb/47A248" alt="MongoDB"/><span>MongoDB</span></div>
+        <div class="skill-logo-card"><img src="https://cdn.simpleicons.org/postgresql/4169E1" alt="PostgreSQL"/><span>PostgreSQL</span></div>
+        <div class="skill-logo-card"><img src="https://cdn.simpleicons.org/vercel/000000" alt="Vercel" class="icon-invert"/><span>Vercel</span></div>
+        <!-- duplicate for infinite loop -->
+        <div class="skill-logo-card" aria-hidden="true"><img src="https://cdn.simpleicons.org/react/61DAFB" alt=""/><span>React</span></div>
+        <div class="skill-logo-card" aria-hidden="true"><img src="https://cdn.simpleicons.org/nodedotjs/339933" alt=""/><span>Node.js</span></div>
+        <div class="skill-logo-card" aria-hidden="true"><img src="https://cdn.simpleicons.org/fastapi/009688" alt=""/><span>FastAPI</span></div>
+        <div class="skill-logo-card" aria-hidden="true"><img src="https://cdn.simpleicons.org/firebase/DD2C00" alt=""/><span>Firebase</span></div>
+        <div class="skill-logo-card" aria-hidden="true"><img src="https://cdn.simpleicons.org/googlecloud/4285F4" alt=""/><span>GCP</span></div>
+        <div class="skill-logo-card" aria-hidden="true"><img src="https://cdn.simpleicons.org/mongodb/47A248" alt=""/><span>MongoDB</span></div>
+        <div class="skill-logo-card" aria-hidden="true"><img src="https://cdn.simpleicons.org/postgresql/4169E1" alt=""/><span>PostgreSQL</span></div>
+        <div class="skill-logo-card" aria-hidden="true"><img src="https://cdn.simpleicons.org/vercel/000000" alt="" class="icon-invert"/><span>Vercel</span></div>
       </div>
     </div>
 
@@ -1355,15 +1457,30 @@
   /* ── HAMBURGER ──────────────────────────── */
   const ham  = document.getElementById('hamburger');
   const mNav = document.getElementById('nav-mobile');
+  
+  function openMenu() {
+    ham.classList.add('open');
+    mNav.classList.add('open');
+    ham.setAttribute('aria-expanded', 'true');
+  }
+  function closeMenu() {
+    ham.classList.remove('open');
+    mNav.classList.remove('open');
+    ham.setAttribute('aria-expanded', 'false');
+  }
   ham.addEventListener('click', () => {
-    const o = ham.classList.toggle('open');
-    mNav.classList.toggle('open', o);
-    ham.setAttribute('aria-expanded', o);
+    ham.classList.contains('open') ? closeMenu() : openMenu();
   });
-  mNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    ham.classList.remove('open'); mNav.classList.remove('open');
-    ham.setAttribute('aria-expanded','false');
-  }));
+  // Close on nav link click
+  mNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  // Auto-close on resize to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 767) closeMenu();
+  });
+  // Close on outside click
+  document.addEventListener('click', e => {
+    if (!ham.contains(e.target) && !mNav.contains(e.target)) closeMenu();
+  });
 
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -1431,19 +1548,7 @@
   const barsGrid = document.getElementById('bars-grid');
   if (barsGrid) barObs.observe(barsGrid);
 
-  /* ── SKILLS CAROUSEL — clone tracks ─────── */
-  const t1 = document.getElementById('track-1');
-  const t2 = document.getElementById('track-2');
-  if (t1) {
-    const clone = t1.cloneNode(true);
-    clone.setAttribute('aria-hidden','true');
-    t1.parentNode.appendChild(clone);
-  }
-  if (t2) {
-    const clone = t2.cloneNode(true);
-    clone.setAttribute('aria-hidden','true');
-    t2.parentNode.appendChild(clone);
-  }
+  /* ── SKILLS CAROUSEL — inline duplicates handle looping, no JS clone needed */
 
   /* ── TIMELINE LINE — faster midpoint trigger */
   const tlWrap = document.getElementById('tl-wrap');
@@ -1470,14 +1575,11 @@
         const center = rect.top + rect.height / 2;
         const dist = center - wH / 2;
         const pct = Math.max(-1, Math.min(1, dist / (wH / 2)));
-        
-        const rotX = pct * -8;
-        const rotY = pct * 4;
-        const transY = pct * -12;
-        
+        const rotX = pct * -6;
+        const rotY = pct * 3;
+        /* Only rotate the wrapper — do NOT touch img.style.transform */
+        /* because object-fit:contain depends on the img filling its box */
         wrap.style.transform = `perspective(1200px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
-        const img = wrap.querySelector('img');
-        if (img) img.style.transform = `translateY(${transY}px) scale(1.05)`;
       });
     }, { passive: true });
   }
