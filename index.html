@@ -34,6 +34,10 @@
     --f-body:      'Plus Jakarta Sans', sans-serif;
     --f-mono:      'JetBrains Mono', monospace;
     --transition:  .32s cubic-bezier(.22,.68,0,1);
+    /* Responsive spacing system */
+    --px: clamp(1rem, 5vw, 5rem);
+    --py: clamp(2.5rem, 7vw, 7rem);
+    --content-max: 1200px;
   }
   [data-theme="dark"] {
     --bg:          #06070a;
@@ -96,7 +100,7 @@
      UTILITIES
   ───────────────────────────────────────── */
   .container{max-width:1140px;margin:0 auto;padding:0 28px}
-  .section{padding:120px 0}
+  .section{padding:clamp(3rem,8vw,8rem) 0}
   .eyebrow{
     font-family:var(--f-mono);font-size:12px;font-weight:600;
     letter-spacing:.12em;text-transform:uppercase;color:var(--accent);
@@ -118,12 +122,15 @@
      NAVBAR — IOS GLASSMORPHISM
   ───────────────────────────────────────── */
   #nav{
-    position:sticky;top:16px;z-index:9999;
+    position:fixed;top:16px;left:0;right:0;width:100%;z-index:9999;
     height:var(--nav-h);
     display:flex;align-items:center;justify-content:center;
     padding:0 24px;
-    margin-bottom: -16px;
     pointer-events:none;
+    transition:transform .35s cubic-bezier(.34,1.56,.64,1), opacity .3s ease;
+  }
+  #nav.nav--hidden{
+    transform:translateY(-120%);opacity:0;pointer-events:none !important;
   }
   /* Glass pill */
   .nav-pill{
@@ -785,73 +792,244 @@
   footer p{font-family:var(--f-mono);font-size:12px;font-weight:600;color:rgba(255,255,255,.3);letter-spacing:.04em}
 
   /* ─────────────────────────────────────────
-     RESPONSIVE
+     RESPONSIVE SYSTEM — MOBILE FIRST
   ───────────────────────────────────────── */
+
+  /* ── Fluid typography base ── */
+  h2, .section-title { font-size: clamp(1.8rem, 5vw, 3rem); }
+  h3, .card-name { font-size: clamp(1.1rem, 3.5vw, 1.6rem); }
+  p, li { font-size: clamp(0.875rem, 2.5vw, 1rem); line-height: 1.7; }
+  .eyebrow { font-size: clamp(0.65rem, 1.5vw, 0.75rem); letter-spacing: 0.1em; }
 
   /* ── Tablets (768–1023px) ── */
   @media(max-width:1023px){
-    .section{padding:80px 0}
-    .hero-inner{grid-template-columns:1fr;gap:40px;text-align:center}
-    .hero-label,.hero-role-row,.hero-ctas,.hero-scroll{justify-content:center}
-    .hero-tagline{margin-left:auto;margin-right:auto}
-    .hero-visual{height:320px;margin:0 auto}
-    .about-grid{grid-template-columns:1fr;gap:48px}
-    .about-stat-card.asc-2{display:none}
-    .about-img-frame{max-height:400px;aspect-ratio:4/3;margin:0 auto;max-width:420px}
-    /* Timeline stacks vertically */
-    .tl-line-bg,.tl-line-prog{left:28px;transform:none}
-    .tl-item{grid-template-columns:40px 1fr;gap:0}
-    .tl-left .tl-card-col,.tl-right .tl-card-col{grid-column:2}
-    .tl-left .tl-dot-col,.tl-right .tl-dot-col{grid-column:1}
-    .tl-left .tl-img-col,.tl-right .tl-img-col{grid-column:2;padding:16px 0 0}
-    .tl-left .tl-dot-col,.tl-right .tl-dot-col{grid-row:1}
-    .tl-left .tl-card-col,.tl-right .tl-card-col{grid-row:1}
-    .tl-left .tl-img-col,.tl-right .tl-img-col{grid-row:2}
-    .skills-bars-grid{grid-template-columns:1fr}
-    .edu-grid{grid-template-columns:1fr}
-    .nss-card{grid-column:1}
-    .cert-grid{grid-template-columns:repeat(2,1fr)}
-  }
-
-  /* ── Mobile (≤767px) ── */
-  @media(max-width:767px){
-    .container{padding:0 20px}
-    .section{padding:64px 0}
-    .section-title{font-size:clamp(32px,9vw,48px)}
-    .hero-name{
-      font-size:clamp(32px,9vw,52px);
-      white-space:nowrap;
-    }
-    .nav-links,.nav-cta{display:none}
-    .hamburger{display:flex}
-    .hv-chip{display:none}
-    .hero-visual{height:260px}
-    .tl-line-bg,.tl-line-prog{left:20px}
-    .tl-item{grid-template-columns:28px 1fr;margin-bottom:56px}
-    .tl-card{padding:20px}
-    .card-name{font-size:20px}
-    .about-grid{gap:32px}
-    .edu-grid{gap:16px}
-    .cert-grid{grid-template-columns:1fr}
-    .socials-row{gap:10px}
-    .soc-link{padding:10px 14px;font-size:14px}
-    .contact-heading{font-size:clamp(32px,10vw,56px)}
-  }
-
-  /* ── Small phones (≤480px) ── */
-  @media(max-width:480px){
-    .hero-ctas{flex-direction:column;align-items:stretch}
-    .btn-fill,.btn-ghost{width:100%;justify-content:center}
-    .nav-pill{padding:6px 10px 6px 18px}
-    .hero-name{font-size:clamp(28px,9vw,44px)}
+    /* Keep hero side-by-side but tighten */
+    .hero-inner{gap:32px}
+    .hero-name{font-size:clamp(32px,5.5vw,64px)}
+    .hero-visual{height:360px}
     .hero-tagline{font-size:16px}
-    .skill-logo-card{width:150px;height:56px;gap:8px}
-    .skill-logo-card span{font-size:13px}
-    .skill-logo-card svg{width:22px;height:22px}
-    .tl-card{padding:16px}
-    .tl-img-wrap{aspect-ratio:16/10}
-    .contact-sub{font-size:16px}
+    /* Keep about 2-col */
+    .about-grid{grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+    .about-img-frame{max-height:380px}
+    .about-stat-card.asc-2{display:none}
+    /* Timeline stays 3-col, just tighter */
+    .tl-item{margin-bottom:60px}
+    .skills-bars-grid{grid-template-columns:1fr 1fr;gap:16px 40px}
+    .edu-grid{grid-template-columns:1fr 1fr;gap:16px}
+    .nss-card{grid-column:1/-1}
+    .cert-grid{grid-template-columns:1fr 1fr;gap:16px}
   }
+
+  /* ── Mobile (≤767px) — SCALE DOWN, DON'T STACK ── */
+  @media(max-width:767px){
+    .container{padding:0 10px}
+    .section-title{font-size:clamp(1.3rem,5.5vw,2rem);letter-spacing:-.02em}
+    .eyebrow{font-size:10px;letter-spacing:.08em}
+
+    /* ─── NAV — keep all links, just shrink them ─── */
+    .nav-links { display: flex !important; }
+    .nav-cta   { display: inline-flex !important; }
+    .hamburger { display: none !important; }
+    .nav-pill  { padding: 5px 8px 5px 14px; gap: 6px; }
+    .nav-links { gap: 0; }
+    .nav-links a { font-size: 11px; padding: 5px 7px; border-radius: 100px; }
+    .nav-cta { font-size: 11px; padding: 7px 14px; white-space: nowrap; }
+    .nav-logo { font-size: 16px; margin-right: 4px; }
+    .theme-btn { width: 30px; height: 30px; min-width: 30px; min-height: 30px; }
+    .theme-btn svg { width: 14px; height: 14px; }
+    .nav-right { gap: 6px; }
+
+    /* ─── HERO — keep 55/45 two-column, just shrink everything inside ─── */
+    /* ─── HERO — keep 55/45 two-column, vertically centered viewport fill ─── */
+    #hero { min-height: 100svh; display: flex; align-items: center; padding-top: calc(var(--nav-h) + 16px); }
+    .hero-inner {
+      grid-template-columns: 55fr 45fr;
+      gap: 14px;
+      padding: 0 12px;
+      align-items: center;
+      width: 100%;
+    }
+    .hero-label {
+      font-size: 9px;
+      margin-bottom: 8px;
+      gap: 5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+    .hero-text { min-width: 0; overflow: hidden; }
+    .hero-name {
+      font-size: clamp(16px, 4.8vw, 28px);
+      white-space: nowrap;
+      overflow: hidden;
+      line-height: 1.0;
+      letter-spacing: -.03em;
+    }
+    .status-dot { width: 6px; height: 6px; }
+    .hero-role-row { margin: 8px 0 0; gap: 6px; }
+    .hero-role { font-size: clamp(11px, 3vw, 16px); min-width: 0; }
+    .hero-tagline {
+      font-size: clamp(10px, 2.4vw, 13px);
+      line-height: 1.5;
+      margin-top: 10px;
+      max-width: 100%;
+    }
+    .hero-ctas { gap: 6px; margin-top: 12px; flex-wrap: wrap; }
+    .btn-fill  { padding: 9px 12px; font-size: 11px; gap: 6px; border-radius: 10px; min-height: unset; }
+    .btn-ghost { padding: 8px 11px; font-size: 11px; gap: 6px; border-radius: 10px; min-height: unset; }
+    .hero-scroll { margin-top: 16px; }
+    .hero-scroll span { font-size: 8px; }
+    /* Orb — scaled to fit 45fr column */
+    .hero-visual { height: auto; min-height: 160px; display: flex; align-items: center; justify-content: center; }
+    .hero-orb { width: min(165px, 44vw); height: min(165px, 44vw); }
+    .hero-orb-ring  { inset: -10px; }
+    .hero-orb-ring2 { inset: -20px; }
+    .hv-chip { display: none; }
+
+    /* ─── PROJECTS TIMELINE — keep 3-column structure ─── */
+    .tl-item {
+      grid-template-columns: 1fr 32px 1fr;
+      margin-bottom: 40px;
+      gap: 0;
+    }
+    .tl-dot { width: 10px; height: 10px; }
+    .tl-line-bg, .tl-line-prog { left: 50%; transform: translateX(-50%); }
+    .tl-card { padding: 12px; border-radius: 14px; }
+    .card-tags-row { gap: 3px; margin-bottom: 8px; }
+    .ctag { font-size: 8px; padding: 2px 6px; }
+    .card-name { font-size: clamp(11px, 3vw, 14px); margin-bottom: 3px; }
+    .card-when { font-size: 9px; margin-bottom: 8px; }
+    .card-pts { gap: 4px; margin-bottom: 10px; }
+    .card-pts li { font-size: clamp(9px, 2.2vw, 11px); padding-left: 12px; line-height: 1.45; }
+    .card-chips { gap: 3px; margin-bottom: 10px; }
+    .cchip { font-size: 9px; padding: 3px 7px; }
+    .card-links { gap: 10px; }
+    .clink { font-size: 10px; min-height: unset; }
+    .tl-img-col { padding: 4px 0; }
+    .tl-img-wrap { border-radius: 10px; padding: 6px; }
+    .tl-left .tl-img-col { padding-left: 6px; }
+    .tl-right .tl-img-col { padding-right: 6px; }
+
+    /* ─── ABOUT — Centered portrait card + full-width content ─── */
+    .about-grid { grid-template-columns: 1fr; gap: 24px; }
+    .about-photo-col { width: 100%; display: flex; justify-content: center; }
+    .about-img-frame { width: 100%; max-width: 260px; aspect-ratio: 3/4; max-height: unset; margin: 0 auto; }
+    .about-stat-card.asc-2 { display: none; }
+    .about-intro { font-size: 12px; line-height: 1.65; }
+    .focus-item { padding: 11px 12px; gap: 10px; border-radius: 12px; }
+    .focus-icon { width: 32px; height: 32px; border-radius: 8px; }
+    .focus-icon svg { width: 16px; height: 16px; }
+    .focus-title { font-size: 12px; }
+    .focus-desc { font-size: 11px; line-height: 1.4; }
+
+    /* ─── SKILLS — keep 2-col bars ─── */
+    .skills-bars-grid { grid-template-columns: 1fr 1fr; gap: 10px 20px; margin-bottom: 32px; }
+    .sb-name { font-size: 11px; }
+    .sb-pct  { font-size: 10px; }
+    .sb-track { height: 4px; }
+
+    /* Carousel — overflow guard + shrink cards */
+    .skills-carousel-wrap { gap: 8px; margin-bottom: 24px; }
+    .carousel-row { gap: 8px; }
+    .carousel-row-1 { animation: marqueeLeft 35s linear infinite; }
+    .carousel-row-2 { animation: marqueeRight 40s linear infinite; }
+    .skill-logo-card { width: 110px; height: 40px; gap: 6px; padding: 0 10px; border-radius: 100px; }
+    .skill-logo-card img { width: 16px; height: 16px; }
+    .skill-logo-card span { font-size: 10px; font-weight: 700; }
+    .skills-keywords { gap: 6px; padding-top: 24px; }
+    .kw-pill { font-size: 10px; padding: 5px 12px; }
+
+    /* ─── EDUCATION — keep 2-col ─── */
+    .edu-grid { grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 28px; }
+    .edu-card { padding: 16px 12px; border-radius: 16px; }
+    .edu-inst { font-size: clamp(12px, 3.5vw, 16px); }
+    .edu-deg  { font-size: 12px; }
+    .edu-year { font-size: 10px; }
+    .edu-badge { font-size: 10px; padding: 4px 10px; }
+    .edu-logo { height: 34px; margin-bottom: 10px; }
+    .edu-logo-sies { height: 36px; }
+    .nss-card { grid-column: 1/-1; padding: 14px 12px; gap: 12px; border-radius: 16px; }
+    .nss-img { width: 48px; height: 48px; }
+    .nss-title { font-size: 14px; }
+    .nss-body  { font-size: 11px; line-height: 1.5; }
+
+    /* ─── CERTIFICATIONS — keep 2-col ─── */
+    .cert-grid { grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 28px; }
+    .cert-card { padding: 12px 10px; border-radius: 16px; gap: 8px; align-items: flex-start; }
+    .cert-logo-img { width: 36px; height: 36px; border-radius: 8px; }
+    .cert-name   { font-size: clamp(10px, 3vw, 13px); line-height: 1.3; }
+    .cert-issuer { font-size: 10px; }
+    .cert-tag    { font-size: 8px; padding: 3px 7px; }
+
+    /* ─── CONTACT ─── */
+    .contact-heading { font-size: clamp(1.5rem, 7vw, 2.2rem); }
+    .contact-sub { font-size: 13px; margin-bottom: 28px; }
+    .contact-email-row { gap: 8px; margin-bottom: 28px; flex-wrap: wrap; justify-content: center; }
+    .contact-email { font-size: clamp(11px, 3vw, 14px); word-break: break-all; }
+    .copy-btn { padding: 6px 12px; font-size: 11px; min-height: unset; }
+    .socials-row { gap: 8px; flex-wrap: wrap; }
+    .soc-link { padding: 8px 12px; font-size: 12px; min-height: unset; }
+    .soc-link svg { width: 16px; height: 16px; }
+  }
+
+  /* ── Small phones (≤479px) — shrink further, never stack ── */
+  @media(max-width:479px){
+    .nav-links a { font-size: 10px; padding: 4px 5px; }
+    .nav-cta { font-size: 10px; padding: 6px 10px; }
+    .hero-name { font-size: clamp(12px, 3.8vw, 18px); }
+    .hero-tagline { font-size: clamp(8px, 1.9vw, 10px); }
+    .btn-fill, .btn-ghost { padding: 6px 8px; font-size: 9px; }
+    .hero-orb { width: min(120px, 40vw); height: min(120px, 40vw); }
+    .tl-item { grid-template-columns: 1fr 26px 1fr; }
+    .tl-card { padding: 8px; border-radius: 10px; }
+    .card-name { font-size: 10px; }
+    .card-pts li { font-size: 8px; }
+    .about-intro { font-size: 10px; }
+    .focus-desc { font-size: 9px; }
+    .edu-card { padding: 12px 8px; }
+    .cert-card { padding: 10px 8px; }
+  }
+
+  /* ── Global mobile resets & accessibility ── */
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  img { max-width: 100%; height: auto; }
+
+  /* Tap targets only for main CTA buttons, not all links */
+  .btn-fill, .btn-ghost, .contact-cta, button.copy-btn { min-height: 40px; }
+
+  /* Marquee global overflow guard */
+  .skills-carousel-wrap {
+    overflow: hidden;
+    width: 100%;
+    max-width: 100vw;
+  }
+
+  /* Nav backdrop-filter fallback for older Android */
+  @supports not (backdrop-filter: blur(1px)) {
+    .nav-pill, #nav, nav { background: var(--bg) !important; }
+    .nav-mobile { background: var(--bg) !important; }
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Section eyebrows — prevent clip on small screens */
+  @media (max-width: 767px) {
+    .eyebrow { letter-spacing: 0.08em; padding: 0; }
+  }
+
   </style>
 </head>
 <body>
@@ -920,7 +1098,7 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
           GitHub
         </a>
-        <a href="https://drive.google.com/file/d/1JK1gy8ts4RTB-k6ZhYhxmobdkUq1pm1m/view?usp=sharing" target="_blank" rel="noopener" class="btn-ghost">
+        <a href="https://drive.google.com/file/d/1RaqnSL5dM6kBbuYRTY_Lu6Vy8oKMUeL/view?usp=sharing" target="_blank" rel="noopener" class="btn-ghost">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
           Resume
         </a>
@@ -1001,7 +1179,7 @@
     <div class="about-grid">
       <div class="about-photo-col rl">
         <div class="about-img-frame">
-          <img src="../assets/My face image.png" alt="Ratish Patil — AI Engineer"/>
+          <img src="../assets/My face image.png" alt="Ratish Patil — AI Engineer" loading="lazy" decoding="async"/>
         </div>
         <div class="about-stat-card asc-2 reveal" data-delay="200">
           <div class="asc-num">5+</div>
@@ -1015,9 +1193,9 @@
           <h2 class="section-title" id="about-heading">AI Architect.<br/>Builder. Shipper.</h2>
         </div>
         <p class="about-intro">
-          I'm <strong>Ratish Patil</strong> — a final year AI &amp; Data Science student at <strong>SIES Graduate School of Technology</strong>, Navi Mumbai. I design and deploy intelligent systems end-to-end: from LLM pipelines and RAG architectures to voice-first AI applications used by real people.
+          I'm <strong>&nbsp;  Ratish Patil </strong>  — a final year AI &amp; Data Science student at <strong>SIES Graduate School of Technology</strong>, Navi Mumbai. I design and deploy intelligent systems end-to-end: from LLM pipelines and RAG architectures to voice-first AI applications used by real people.
         </p>
-        <p class="about-intro">I don't just experiment — I <strong>ship</strong>. Every project here is live, used, and built with production-grade thinking.</p>
+        <p class="about-intro">I don't just experiment — I <strong>&nbsp;ship</strong>. Every project here is live, used, and built with production-grade thinking.</p>
         <div class="focus-areas">
           <div class="focus-item reveal" data-delay="0">
             <div class="focus-icon">
@@ -1338,14 +1516,14 @@
     </div>
     <div class="edu-grid">
       <div class="edu-card reveal" data-delay="0">
-        <img src="../assets/sies.png" alt="SIES GST Logo" class="edu-logo edu-logo-sies" />
+        <img src="../assets/sies.png" alt="SIES GST Logo" class="edu-logo edu-logo-sies" loading="lazy" decoding="async" />
         <div class="edu-inst">SIES Graduate School of Technology</div>
         <div class="edu-deg">B.E. — Artificial Intelligence &amp; Data Science</div>
         <div class="edu-year">2023 – 2027 · Navi Mumbai</div>
         <span class="edu-badge">9.26 CGPA</span>
       </div>
       <div class="edu-card reveal" data-delay="100">
-        <img src="../assets/birla.png" alt="B.K. Birla College Logo" class="edu-logo" />
+        <img src="../assets/birla.png" alt="B.K. Birla College Logo" class="edu-logo" loading="lazy" decoding="async" />
         <div class="edu-inst">B.K. Birla College</div>
         <div class="edu-deg">HSC — Science Stream</div>
         <div class="edu-year">2021 – 2023</div>
@@ -1353,7 +1531,7 @@
       </div>
       <div class="nss-card reveal" data-delay="200">
         <div class="nss-icon-wrap">
-          <img src="../assets/nss.webp" alt="NSS Logo" class="nss-img" />
+          <img src="../assets/nss.png" alt="NSS Logo" class="nss-img" loading="lazy" decoding="async" />
         </div>
         <div>
           <div class="nss-title">NSS Volunteer — Community Leadership</div>
@@ -1375,7 +1553,7 @@
     </div>
     <div class="cert-grid">
       <div class="cert-card reveal" data-delay="0">
-        <img src="../assets/gfg.png" alt="GeeksforGeeks Logo" class="cert-logo-img" />
+        <img src="../assets/gfg.png" alt="GeeksforGeeks Logo" class="cert-logo-img" loading="lazy" decoding="async" />
         <div class="cert-card-content">
           <div class="cert-name">21 Days, 21 Projects — ML/DS Applied Projects</div>
           <div class="cert-issuer">GeeksforGeeks</div>
@@ -1384,7 +1562,7 @@
         </div>
       </div>
       <div class="cert-card reveal" data-delay="80">
-        <img src="../assets/campusX.png" alt="CampusX Logo" class="cert-logo-img" />
+        <img src="../assets/campusX.png" alt="CampusX Logo" class="cert-logo-img" loading="lazy" decoding="async" />
         <div class="cert-card-content">
           <div class="cert-name">Advanced RAG &amp; LLM Architectures</div>
           <div class="cert-issuer">CampusX</div>
@@ -1464,33 +1642,7 @@
     applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
   });
 
-  /* ── HAMBURGER ──────────────────────────── */
-  const ham  = document.getElementById('hamburger');
-  const mNav = document.getElementById('nav-mobile');
-  
-  function openMenu() {
-    ham.classList.add('open');
-    mNav.classList.add('open');
-    ham.setAttribute('aria-expanded', 'true');
-  }
-  function closeMenu() {
-    ham.classList.remove('open');
-    mNav.classList.remove('open');
-    ham.setAttribute('aria-expanded', 'false');
-  }
-  ham.addEventListener('click', () => {
-    ham.classList.contains('open') ? closeMenu() : openMenu();
-  });
-  // Close on nav link click
-  mNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-  // Auto-close on resize to desktop
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 767) closeMenu();
-  });
-  // Close on outside click
-  document.addEventListener('click', e => {
-    if (!ham.contains(e.target) && !mNav.contains(e.target)) closeMenu();
-  });
+
 
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -1625,17 +1777,58 @@
     });
   }
 
-  /* ── COPY EMAIL ─────────────────────────── */
-  const copyBtn = document.getElementById('copy-email');
-  if (copyBtn) {
-    copyBtn.addEventListener('click', () => {
-      navigator.clipboard.writeText('patilratish369@gmail.com').then(() => {
-        copyBtn.textContent = '✓ Copied!';
-        copyBtn.classList.add('copied');
-        setTimeout(() => { copyBtn.textContent = 'Copy'; copyBtn.classList.remove('copied'); }, 2200);
-      });
-    });
+  /* ── MOBILE MENU TOGGLE — with body scroll lock ────────── */
+  const hamburger = document.getElementById('hamburger');
+  const navMobile = document.getElementById('nav-mobile');
+
+  function openMenu() {
+    hamburger.classList.add('open');
+    navMobile.classList.add('open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    navMobile.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden'; // lock scroll
   }
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    navMobile.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    navMobile.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = ''; // restore scroll
+  }
+
+  if (hamburger && navMobile) {
+    hamburger.addEventListener('click', () => {
+      navMobile.classList.contains('open') ? closeMenu() : openMenu();
+    });
+
+    // Close when a nav link is clicked
+    navMobile.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && navMobile.classList.contains('open')) closeMenu();
+    });
+
+    // Auto-close when resized to desktop width
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768 && navMobile.classList.contains('open')) closeMenu();
+    }, { passive: true });
+  }
+
+  /* ── SMART AUTO-HIDING NAVBAR ── */
+  let lastScrollY = window.scrollY;
+  const navEl = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+    if (currentScrollY > 80 && currentScrollY > lastScrollY) {
+      navEl?.classList.add('nav--hidden');
+    } else {
+      navEl?.classList.remove('nav--hidden');
+    }
+    lastScrollY = currentScrollY;
+  }, { passive: true });
 
 })();
 </script>
