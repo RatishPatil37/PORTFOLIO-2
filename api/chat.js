@@ -97,46 +97,58 @@ BEHAVIOR RULES:
       parts: [{ text: message }]
     });
 
-    const models = ['gemini-1.5-flash', 'gemini-2.0-flash', 'gemini-2.5-flash'];
+    // Gemini 3.x models from dashboard
+    const modelNames = [
+      'gemini-3.5-flash-lite',
+      'gemini-3.5-flash',
+      'gemini-3.1-flash-lite',
+      'gemini-3.6-flash',
+      'gemini-3-flash'
+    ];
+
+    const apiVersions = ['v1beta', 'v1alpha'];
     let lastError = null;
     let replyText = null;
 
-    for (const modelName of models) {
-      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
-      try {
-        const response = await fetch(endpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            systemInstruction: {
-              parts: [{ text: systemInstruction }]
-            },
-            contents: contents,
-            generationConfig: {
-              temperature: 0.7,
-              maxOutputTokens: 300
-            }
-          })
-        });
+    for (const ver of apiVersions) {
+      for (const modelName of modelNames) {
+        const endpoint = `https://generativelanguage.googleapis.com/${ver}/models/${modelName}:generateContent?key=${apiKey}`;
+        try {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              systemInstruction: {
+                parts: [{ text: systemInstruction }]
+              },
+              contents: contents,
+              generationConfig: {
+                temperature: 0.7,
+                maxOutputTokens: 300
+              }
+            })
+          });
 
-        const data = await response.json();
-        if (response.ok && data.candidates?.[0]?.content?.parts?.[0]?.text) {
-          replyText = data.candidates[0].content.parts[0].text;
-          break;
-        } else {
-          lastError = data.error?.message || JSON.stringify(data);
-          console.warn(`Model ${modelName} failed:`, lastError);
+          const data = await response.json();
+          if (response.ok && data.candidates?.[0]?.content?.parts?.[0]?.text) {
+            replyText = data.candidates[0].content.parts[0].text;
+            break;
+          } else {
+            lastError = data.error?.message || JSON.stringify(data);
+            console.warn(`Attempt ${ver}/${modelName} failed:`, lastError);
+          }
+        } catch (e) {
+          lastError = e.message;
         }
-      } catch (e) {
-        lastError = e.message;
       }
+      if (replyText) break;
     }
 
     if (replyText) {
       return res.status(200).json({ reply: replyText });
     } else {
       return res.status(500).json({ 
-        error: `Gemini API error: ${lastError || 'Unknown error'}` 
+        error: `Gemini 3.x API Error: ${lastError || 'Failed to generate response'}` 
       });
     }
 
