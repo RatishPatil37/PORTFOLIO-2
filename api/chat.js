@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-  // CORS setup
+  // Enable CORS
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
@@ -18,7 +18,17 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { message, history } = req.body || {};
+    let body = req.body;
+    if (typeof body === 'string') {
+      try {
+        body = JSON.parse(body);
+      } catch (e) {
+        // use raw body
+      }
+    }
+    body = body || {};
+
+    const { message, history } = body;
     if (!message) {
       return res.status(400).json({ error: 'Message is required' });
     }
@@ -26,11 +36,11 @@ export default async function handler(req, res) {
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
       return res.status(500).json({ 
-        error: 'API key not configured. Please set GEMINI_API_KEY in Vercel environment variables.' 
+        error: 'API key not configured. Please add GEMINI_API_KEY in Vercel Environment Variables.' 
       });
     }
 
-    // System prompt with full RAG knowledge context about Ratish Patil
+    // RAG System Prompt
     const systemInstruction = `You are "Ask Ratish AI", a friendly, professional AI Assistant representing Ratish Patil on his personal portfolio website.
 
 FACTS ABOUT RATISH PATIL:
@@ -73,10 +83,7 @@ BEHAVIOR RULES:
 - If asked off-topic questions (e.g. recipes, weather, general trivia), politely reply that you are specialized in answering questions about Ratish's AI engineering work, projects, and skills.
 - If asked for information not in your context, say Ratish hasn't indexed that specific detail yet, but invite them to contact him at patilratish369@gmail.com.`;
 
-    // Construct conversation history for Gemini API payload
     const contents = [];
-    
-    // Add past user/model turns if available
     if (Array.isArray(history)) {
       history.forEach(item => {
         if (item.role && item.parts) {
@@ -85,41 +92,56 @@ BEHAVIOR RULES:
       });
     }
 
-    // Add current user prompt
     contents.push({
       role: 'user',
       parts: [{ text: message }]
     });
 
-    const geminiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+    const models = ['gemini-1.5-flash', 'gemini-2.0-flash', 'gemini-2.5-flash'];
+    let lastError = null;
+    let replyText = null;
 
-    const response = await fetch(geminiEndpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        systemInstruction: {
-          parts: [{ text: systemInstruction }]
-        },
-        contents: contents,
-        generationConfig: {
-          temperature: 0.7,
-          maxOutputTokens: 300
+    for (const modelName of models) {
+      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            systemInstruction: {
+              parts: [{ text: systemInstruction }]
+            },
+            contents: contents,
+            generationConfig: {
+              temperature: 0.7,
+              maxOutputTokens: 300
+            }
+          })
+        });
+
+        const data = await response.json();
+        if (response.ok && data.candidates?.[0]?.content?.parts?.[0]?.text) {
+          replyText = data.candidates[0].content.parts[0].text;
+          break;
+        } else {
+          lastError = data.error?.message || JSON.stringify(data);
+          console.warn(`Model ${modelName} failed:`, lastError);
         }
-      })
-    });
-
-    if (!response.ok) {
-      const errData = await response.json().catch(() => ({}));
-      console.error('Gemini API Error:', errData);
-      return res.status(500).json({ error: 'AI model error', details: errData });
+      } catch (e) {
+        lastError = e.message;
+      }
     }
 
-    const data = await response.json();
-    const replyText = data.candidates?.[0]?.content?.parts?.[0]?.text || "I'm sorry, I couldn't process that request right now.";
+    if (replyText) {
+      return res.status(200).json({ reply: replyText });
+    } else {
+      return res.status(500).json({ 
+        error: `Gemini API error: ${lastError || 'Unknown error'}` 
+      });
+    }
 
-    return res.status(200).json({ reply: replyText });
   } catch (err) {
-    console.error('Serverless Function Error:', err);
-    return res.status(500).json({ error: 'Internal server error' });
+    console.error('Serverless Function Exception:', err);
+    return res.status(500).json({ error: err.message || 'Internal server error' });
   }
 }
