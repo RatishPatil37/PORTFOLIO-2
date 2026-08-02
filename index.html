@@ -3,8 +3,52 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ratish Patil — AI Architect & Engineer</title>
-  <meta name="description" content="Ratish Patil — AI Architect. Building LLM pipelines, intelligent agents, and real-world AI products that ship."/>
+  <title>Ratish Patil — AI Architect &amp; Software Engineer</title>
+  <meta name="description" content="Ratish Patil — AI Architect &amp; Full-Stack Builder. Building LLM pipelines, Agentic AI, RAG systems, and Edge Computer Vision products."/>
+  <meta name="keywords" content="Ratish Patil, AI Engineer, Agentic AI, RAG, Machine Learning, KrishiSetu, SmartSight, SIES GST, Portfolio"/>
+  <meta name="author" content="Ratish Patil"/>
+  <meta name="theme-color" content="#06070a"/>
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://ratish-patil.vercel.app"/>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>"/>
+
+  <!-- Open Graph / Social Cards -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://ratish-patil.vercel.app"/>
+  <meta property="og:title" content="Ratish Patil — AI Architect &amp; Engineer"/>
+  <meta property="og:description" content="Building intelligent systems — from LLM pipelines and AI agents to real-world products that ship."/>
+  <meta property="og:image" content="https://ratish-patil.vercel.app/portfolio-web/assets/Krishisetu%20asset.png"/>
+  <meta property="og:site_name" content="Ratish Patil Portfolio"/>
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Ratish Patil — AI Architect &amp; Engineer"/>
+  <meta name="twitter:description" content="Building intelligent systems — from LLM pipelines and AI agents to real-world products that ship."/>
+  <meta name="twitter:image" content="https://ratish-patil.vercel.app/portfolio-web/assets/Krishisetu%20asset.png"/>
+
+  <!-- JSON-LD Structured Data Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ratish Patil",
+    "jobTitle": "AI Architect & Software Engineer",
+    "alumniOf": {
+      "@type": "EducationalOrganization",
+      "name": "SIES Graduate School of Technology"
+    },
+    "url": "https://ratish-patil.vercel.app",
+    "sameAs": [
+      "https://github.com/RatishPatil37",
+      "https://linkedin.com/in/ratish-patil"
+    ],
+    "knowsAbout": ["Agentic AI", "RAG", "Machine Learning", "YOLO", "Computer Vision", "React", "Node.js", "Python", "FastAPI"]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
@@ -17,18 +61,18 @@
     --bg2:         #EDE8DE;
     --surface:     #FAF7F2;
     --ink:         #1A1612;
-    --ink2:        #4A4540;
-    --muted:       #7A7570;
-    --line:        rgba(26, 22, 18, 0.09);
-    --accent:      #059669;
-    --accent2:     #2563eb;
+    --ink2:        #3D3833;
+    --muted:       #595450;
+    --line:        rgba(26, 22, 18, 0.12);
+    --accent:      #047857;
+    --accent2:     #1d4ed8;
     --accent-soft: #d1fae5;
-    --amber:       #d97706;
+    --amber:       #b45309;
     --amber-soft:  #fef3c7;
     --hover-bg:    #EDE8DE;
-    --glass-bg:    rgba(245, 240, 232, 0.72);
-    --glass-border:rgba(26, 22, 18, 0.08);
-    --shadow-card: 0 12px 40px -10px rgba(5, 150, 105, 0.10);
+    --glass-bg:    rgba(245, 240, 232, 0.85);
+    --glass-border:rgba(26, 22, 18, 0.12);
+    --shadow-card: 0 12px 40px -10px rgba(5, 150, 105, 0.12);
     --nav-h:       64px;
     --f-display:   'Outfit', sans-serif;
     --f-body:      'Plus Jakarta Sans', sans-serif;
@@ -44,22 +88,22 @@
     --bg2:         #0d1117;
     --surface:     #0b0d13;
     --ink:         #f8fafc;
-    --ink2:        #94a3b8;
-    --muted:       #64748b;
-    --line:        rgba(255, 255, 255, 0.06);
+    --ink2:        #cbd5e1;
+    --muted:       #94a3b8;
+    --line:        rgba(255, 255, 255, 0.09);
     --accent:      #10b981;
     --accent2:     #3b82f6;
     --accent-soft: #064e3b;
     --amber:       #f59e0b;
     --amber-soft:  #451a03;
     --hover-bg:    #111827;
-    --glass-bg:    rgba(6, 7, 10, 0.45);
-    --glass-border:rgba(255, 255, 255, 0.08);
+    --glass-bg:    rgba(6, 7, 10, 0.65);
+    --glass-border:rgba(255, 255, 255, 0.12);
     --shadow-card: 0 12px 40px -10px rgba(0,0,0,0.4);
   }
 
   /* ─────────────────────────────────────────
-     RESET
+     RESET & ACCESSIBILITY
   ───────────────────────────────────────── */
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -73,6 +117,30 @@
   a{color:inherit;text-decoration:none}
   ul{list-style:none}
   button{cursor:pointer;font-family:var(--f-body);border:none;background:none}
+
+  /* Accessibility Focus Outline Ring */
+  *:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  /* Skip to Main Content Link */
+  .skip-link {
+    position: absolute;
+    top: -100px;
+    left: 16px;
+    background: var(--accent);
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    z-index: 10000;
+    transition: top 0.2s ease;
+  }
+  .skip-link:focus {
+    top: 16px;
+  }
 
   ::selection { background: var(--accent); color: #fff; }
   ::-webkit-scrollbar { width: 8px; }
@@ -1030,9 +1098,200 @@
     .eyebrow { letter-spacing: 0.08em; padding: 0; }
   }
 
+  /* ─────────────────────────────────────────
+     CHATBOT WIDGET — ASK RATISH AI
+  ───────────────────────────────────────── */
+  .chat-widget {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+  }
+  .chat-fab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: #ffffff;
+    padding: 12px 20px;
+    border-radius: 100px;
+    box-shadow: 0 8px 30px rgba(16, 185, 129, 0.35);
+    font-weight: 700;
+    font-size: 14px;
+    transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  }
+  .chat-fab:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 36px rgba(16, 185, 129, 0.45);
+    background: var(--accent2);
+  }
+  .chat-window {
+    position: fixed;
+    bottom: 84px;
+    right: 24px;
+    width: 360px;
+    max-width: calc(100vw - 32px);
+    height: 480px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), visibility 0s 0.3s;
+    z-index: 9998;
+  }
+  .chat-window.open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    visibility: visible;
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), visibility 0s 0s;
+  }
+  .chat-header {
+    padding: 16px 20px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .chat-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .chat-title-wrap { flex: 1; min-width: 0; }
+  .chat-title { font-weight: 800; font-size: 15px; color: var(--ink); line-height: 1.2; }
+  .chat-status { font-size: 11px; color: var(--muted); font-family: var(--f-mono); display: flex; align-items: center; gap: 6px; margin-top: 2px; }
+  .chat-status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  .chat-close { font-size: 24px; color: var(--muted); cursor: pointer; padding: 0 4px; line-height: 1; }
+  .chat-close:hover { color: var(--ink); }
+
+  .chat-body {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    scrollbar-width: thin;
+  }
+  .chat-msg { display: flex; flex-direction: column; max-width: 85%; }
+  .chat-msg-ai { align-self: flex-start; }
+  .chat-msg-user { align-self: flex-end; }
+  .chat-bubble {
+    padding: 12px 16px;
+    border-radius: 18px;
+    font-size: 14px;
+    line-height: 1.5;
+    word-break: break-word;
+  }
+  .chat-msg-ai .chat-bubble {
+    background: var(--surface);
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-top-left-radius: 4px;
+  }
+  .chat-msg-user .chat-bubble {
+    background: var(--accent);
+    color: #ffffff;
+    border-top-right-radius: 4px;
+  }
+  .chat-suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .chat-chip {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 100px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .chat-chip:hover {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .chat-input-row {
+    padding: 12px 16px;
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .chat-input-row input {
+    flex: 1;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    padding: 10px 16px;
+    font-size: 14px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .chat-input-row input:focus {
+    border-color: var(--accent);
+  }
+  .chat-input-row button {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .chat-input-row button:hover {
+    background: var(--accent2);
+    transform: scale(1.05);
+  }
+
+  /* Typing dots */
+  .chat-typing { display: flex; gap: 4px; padding: 10px 14px; }
+  .chat-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); animation: bounceY 1.4s infinite ease-in-out; }
+  .chat-dot:nth-child(2) { animation-delay: 0.2s; }
+  .chat-dot:nth-child(3) { animation-delay: 0.4s; }
+
+  @media (max-width: 480px) {
+    .chat-widget { bottom: 16px; right: 16px; }
+    .chat-window {
+      right: 12px;
+      left: 12px;
+      width: auto;
+      bottom: 76px;
+      height: 440px;
+    }
+  }
+
   </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
 <!-- ════════════════════════════════════
      NAVIGATION — IOS GLASSMORPHISM
@@ -1069,6 +1328,8 @@
   </div>
 </nav>
 
+<main id="main-content">
+
 <!-- ════════════════════════════════════
      HERO
 ════════════════════════════════════ -->
@@ -1082,7 +1343,7 @@
         <span>Available for Internship · Navi Mumbai</span>
       </div>
       <h1 class="hero-name" id="hero-heading">
-        <span id="name-el"></span><span class="cursor-blink" id="name-cursor" style="display:none">|</span>
+        <span id="name-el">RATISH PATIL</span><span class="cursor-blink" id="name-cursor" style="display:none">|</span>
       </h1>
       <div class="hero-role-row">
         <div class="role-dot"></div>
@@ -1179,7 +1440,7 @@
     <div class="about-grid">
       <div class="about-photo-col rl">
         <div class="about-img-frame">
-          <img src="../assets/My_face_new.png" alt="Ratish Patil — AI Engineer" loading="lazy" decoding="async"/>
+          <img src="portfolio-web/assets/My_face_new.png" alt="Ratish Patil — AI Engineer" loading="lazy" decoding="async"/>
         </div>
         <div class="about-stat-card asc-2 reveal" data-delay="200">
           <div class="asc-num">5+</div>
@@ -1284,7 +1545,7 @@
         <div class="tl-dot-col" aria-hidden="true"><div class="tl-dot"></div></div>
         <div class="tl-img-col rr">
           <div class="tl-img-wrap parallax-img contain-fit">
-            <img src="../assets/Krishisetu asset.png" alt="KrishiSetu Platform" loading="lazy"/>
+            <img src="portfolio-web/assets/Krishisetu asset.png" alt="KrishiSetu Platform" loading="lazy"/>
           </div>
         </div>
       </div>
@@ -1293,7 +1554,7 @@
       <div class="tl-item tl-right">
         <div class="tl-img-col rl">
           <div class="tl-img-wrap parallax-img">
-            <img src="../assets/Smart_Sight_Front.jpeg" alt="Smart Sight Device" loading="lazy"/>
+            <img src="portfolio-web/assets/Smart_Sight_Front.jpeg" alt="Smart Sight Device" loading="lazy"/>
           </div>
         </div>
         <div class="tl-dot-col" aria-hidden="true"><div class="tl-dot"></div></div>
@@ -1375,7 +1636,7 @@
       <div class="tl-item tl-right">
         <div class="tl-img-col rl">
           <div class="tl-img-wrap parallax-img full-fit">
-            <img src="../assets/IOT tracker asset.png" alt="IoT Vehicle Tracker" loading="lazy"/>
+            <img src="portfolio-web/assets/IOT tracker asset.png" alt="IoT Vehicle Tracker" loading="lazy"/>
           </div>
         </div>
         <div class="tl-dot-col" aria-hidden="true"><div class="tl-dot"></div></div>
@@ -1516,14 +1777,14 @@
     </div>
     <div class="edu-grid">
       <div class="edu-card reveal" data-delay="0">
-        <img src="../assets/sies.png" alt="SIES GST Logo" class="edu-logo edu-logo-sies" loading="lazy" decoding="async" />
+        <img src="portfolio-web/assets/sies.png" alt="SIES GST Logo" class="edu-logo edu-logo-sies" loading="lazy" decoding="async" />
         <div class="edu-inst">SIES Graduate School of Technology</div>
         <div class="edu-deg">B.E. — Artificial Intelligence &amp; Data Science</div>
         <div class="edu-year">2023 – 2027 · Navi Mumbai</div>
         <span class="edu-badge">9.26 CGPA</span>
       </div>
       <div class="edu-card reveal" data-delay="100">
-        <img src="../assets/birla.png" alt="B.K. Birla College Logo" class="edu-logo" loading="lazy" decoding="async" />
+        <img src="portfolio-web/assets/birla.png" alt="B.K. Birla College Logo" class="edu-logo" loading="lazy" decoding="async" />
         <div class="edu-inst">B.K. Birla College</div>
         <div class="edu-deg">HSC — Science Stream</div>
         <div class="edu-year">2021 – 2023</div>
@@ -1531,7 +1792,7 @@
       </div>
       <div class="nss-card reveal" data-delay="200">
         <div class="nss-icon-wrap">
-          <img src="../assets/nss.webp" alt="NSS Logo" class="nss-img" loading="lazy" decoding="async" />
+          <img src="portfolio-web/assets/nss.png" alt="NSS Logo" class="nss-img" loading="lazy" decoding="async" />
         </div>
         <div>
           <div class="nss-title">NSS Volunteer — Community Leadership</div>
@@ -1553,7 +1814,7 @@
     </div>
     <div class="cert-grid">
       <div class="cert-card reveal" data-delay="0">
-        <img src="../assets/gfg.png" alt="GeeksforGeeks Logo" class="cert-logo-img" loading="lazy" decoding="async" />
+        <img src="portfolio-web/assets/gfg.png" alt="GeeksforGeeks Logo" class="cert-logo-img" loading="lazy" decoding="async" />
         <div class="cert-card-content">
           <div class="cert-name">21 Days, 21 Projects — ML/DS Applied Projects</div>
           <div class="cert-issuer">GeeksforGeeks</div>
@@ -1562,7 +1823,7 @@
         </div>
       </div>
       <div class="cert-card reveal" data-delay="80">
-        <img src="../assets/campusX.png" alt="CampusX Logo" class="cert-logo-img" loading="lazy" decoding="async" />
+        <img src="portfolio-web/assets/campusX.png" alt="CampusX Logo" class="cert-logo-img" loading="lazy" decoding="async" />
         <div class="cert-card-content">
           <div class="cert-name">Advanced RAG &amp; LLM Architectures</div>
           <div class="cert-issuer">CampusX</div>
@@ -1606,6 +1867,44 @@
     </div>
   </div>
 </section>
+</main>
+
+<!-- ════════════════════════════════════
+     ASK RATISH AI — CHATBOT WIDGET
+════════════════════════════════════ -->
+<div id="chat-widget" class="chat-widget">
+  <button id="chat-fab" class="chat-fab" aria-label="Ask Ratish AI" aria-expanded="false">
+    <svg class="chat-icon-open" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <svg class="chat-icon-close" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    <span>Ask AI</span>
+  </button>
+  <div id="chat-window" class="chat-window" aria-hidden="true">
+    <div class="chat-header">
+      <div class="chat-avatar">🤖</div>
+      <div class="chat-title-wrap">
+        <div class="chat-title">Ask Ratish AI</div>
+        <div class="chat-status"><span class="chat-status-dot"></span> Gemini 3.5 Flash Lite</div>
+      </div>
+      <button id="chat-close" class="chat-close" aria-label="Close Chat">&times;</button>
+    </div>
+    <div id="chat-body" class="chat-body">
+      <div class="chat-msg chat-msg-ai">
+        <div class="chat-bubble">Hey! 👋 I'm Ratish's AI Assistant. Ask me anything about his AI/ML projects (KrishiSetu, SmartSight), skills, or CGPA!</div>
+      </div>
+      <div class="chat-suggestions" id="chat-suggestions">
+        <button class="chat-chip" data-q="What is Ratish's CGPA?">🎓 CGPA &amp; Education</button>
+        <button class="chat-chip" data-q="Tell me about KrishiSetu project">🌾 KrishiSetu Project</button>
+        <button class="chat-chip" data-q="What hardware does SmartSight use?">👁️ SmartSight Edge AI</button>
+      </div>
+    </div>
+    <form id="chat-form" class="chat-input-row">
+      <input type="text" id="chat-input" placeholder="Ask anything about Ratish..." autocomplete="off" required/>
+      <button type="submit" id="chat-send" aria-label="Send message">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+      </button>
+    </form>
+  </div>
+</div>
 
 <footer>
   <p>© 2026 Ratish Patil — Built with intention.</p>
@@ -1678,6 +1977,7 @@
   if (reduced) { nameEl.textContent = NAME; startRoles(); }
   else {
     let ni = 0;
+    nameEl.textContent = '';
     const iv = setInterval(() => {
       nameEl.textContent += NAME[ni++];
       if (ni >= NAME.length) {
@@ -1829,6 +2129,153 @@
     }
     lastScrollY = currentScrollY;
   }, { passive: true });
+
+  /* ── CHATBOT WIDGET CONTROLLER ────────────────── */
+  const chatFab = document.getElementById('chat-fab');
+  const chatWindow = document.getElementById('chat-window');
+  const chatClose = document.getElementById('chat-close');
+  const chatForm = document.getElementById('chat-form');
+  const chatInput = document.getElementById('chat-input');
+  const chatBody = document.getElementById('chat-body');
+  const chatSuggestions = document.getElementById('chat-suggestions');
+  const chatIconOpen = chatFab?.querySelector('.chat-icon-open');
+  const chatIconClose = chatFab?.querySelector('.chat-icon-close');
+
+  let chatHistory = [];
+
+  function toggleChat(open) {
+    const isCurrentlyOpen = chatWindow?.classList.contains('open');
+    const shouldOpen = open !== undefined ? open : !isCurrentlyOpen;
+    if (shouldOpen) {
+      chatWindow?.classList.add('open');
+      chatFab?.setAttribute('aria-expanded', 'true');
+      chatWindow?.setAttribute('aria-hidden', 'false');
+      if (chatIconOpen) chatIconOpen.style.display = 'none';
+      if (chatIconClose) chatIconClose.style.display = 'block';
+      setTimeout(() => chatInput?.focus(), 300);
+    } else {
+      chatWindow?.classList.remove('open');
+      chatFab?.setAttribute('aria-expanded', 'false');
+      chatWindow?.setAttribute('aria-hidden', 'true');
+      if (chatIconOpen) chatIconOpen.style.display = 'block';
+      if (chatIconClose) chatIconClose.style.display = 'none';
+    }
+  }
+
+  if (chatFab && chatClose) {
+    chatFab.addEventListener('click', () => toggleChat());
+    chatClose.addEventListener('click', () => toggleChat(false));
+  }
+
+  function appendUserMsg(text) {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = 'chat-msg chat-msg-user';
+    msgDiv.innerHTML = `<div class="chat-bubble">${escapeHtml(text)}</div>`;
+    chatBody?.appendChild(msgDiv);
+    scrollToBottom();
+  }
+
+  function appendAiMsg(text) {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = 'chat-msg chat-msg-ai';
+    msgDiv.innerHTML = `<div class="chat-bubble">${formatAiText(text)}</div>`;
+    chatBody?.appendChild(msgDiv);
+    scrollToBottom();
+  }
+
+  function showTypingIndicator() {
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'chat-msg chat-msg-ai';
+    typingDiv.id = 'chat-typing-indicator';
+    typingDiv.innerHTML = `
+      <div class="chat-bubble chat-typing">
+        <span class="chat-dot"></span>
+        <span class="chat-dot"></span>
+        <span class="chat-dot"></span>
+      </div>`;
+    chatBody?.appendChild(typingDiv);
+    scrollToBottom();
+  }
+
+  function removeTypingIndicator() {
+    const el = document.getElementById('chat-typing-indicator');
+    if (el) el.remove();
+  }
+
+  function scrollToBottom() {
+    if (chatBody) chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function formatAiText(str) {
+    let formatted = escapeHtml(str);
+    // Simple link formatting
+    formatted = formatted.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline;">$1</a>');
+    return formatted;
+  }
+
+  async function handleUserSubmit(messageText) {
+    const query = messageText.trim();
+    if (!query) return;
+
+    if (chatSuggestions) chatSuggestions.style.display = 'none';
+
+    appendUserMsg(query);
+    if (chatInput) chatInput.value = '';
+
+    showTypingIndicator();
+
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: query,
+          history: chatHistory
+        })
+      });
+
+      removeTypingIndicator();
+
+      if (!response.ok) {
+        appendAiMsg("I'm currently unable to connect to the backend server. Please try again later or contact Ratish directly at patilratish369@gmail.com!");
+        return;
+      }
+
+      const data = await response.json();
+      const reply = data.reply || "I didn't catch that. Could you try asking again?";
+      
+      appendAiMsg(reply);
+
+      // Keep up to 6 turns of memory
+      chatHistory.push({ role: 'user', parts: [{ text: query }] });
+      chatHistory.push({ role: 'model', parts: [{ text: reply }] });
+      if (chatHistory.length > 12) chatHistory = chatHistory.slice(-12);
+
+    } catch (err) {
+      removeTypingIndicator();
+      appendAiMsg("Network error. Please check your connection and try again.");
+    }
+  }
+
+  if (chatForm) {
+    chatForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      handleUserSubmit(chatInput?.value || '');
+    });
+  }
+
+  if (chatSuggestions) {
+    chatSuggestions.querySelectorAll('.chat-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const query = chip.dataset.q;
+        if (query) handleUserSubmit(query);
+      });
+    });
+  }
 
 })();
 </script>
