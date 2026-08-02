@@ -3341,7 +3341,7 @@
         <div class="about-grid">
           <div class="about-photo-col rl">
             <div class="about-img-frame">
-              <img src="portfolio-web/assets/My_face_new.webp" alt="Ratish Patil — AI Engineer" loading="lazy"
+              <img src="../assets/My_face_new.webp" alt="Ratish Patil — AI Engineer" loading="lazy"
                 decoding="async" />
             </div>
             <div class="about-stat-card asc-2 reveal" data-delay="200">
@@ -3476,7 +3476,7 @@
             </div>
             <div class="tl-img-col rr">
               <div class="tl-img-wrap parallax-img contain-fit">
-                <img src="portfolio-web/assets/Krishisetu asset.webp" alt="KrishiSetu Platform" loading="lazy" />
+                <img src="../assets/Krishisetu asset.webp" alt="KrishiSetu Platform" loading="lazy" />
               </div>
             </div>
           </div>
@@ -3485,7 +3485,7 @@
           <div class="tl-item tl-right">
             <div class="tl-img-col rl">
               <div class="tl-img-wrap parallax-img">
-                <img src="portfolio-web/assets/Smart_Sight_Front.webp" alt="Smart Sight Device" loading="lazy" />
+                <img src="../assets/Smart_Sight_Front.webp" alt="Smart Sight Device" loading="lazy" />
               </div>
             </div>
             <div class="tl-dot-col" aria-hidden="true">
@@ -3583,7 +3583,7 @@
           <div class="tl-item tl-right">
             <div class="tl-img-col rl">
               <div class="tl-img-wrap parallax-img full-fit">
-                <img src="portfolio-web/assets/IOT tracker asset.webp" alt="IoT Vehicle Tracker" loading="lazy" />
+                <img src="../assets/IOT tracker asset.webp" alt="IoT Vehicle Tracker" loading="lazy" />
               </div>
             </div>
             <div class="tl-dot-col" aria-hidden="true">
@@ -3778,7 +3778,7 @@
         </div>
         <div class="edu-grid">
           <div class="edu-card reveal" data-delay="0">
-            <img src="portfolio-web/assets/sies.webp" alt="SIES GST Logo" class="edu-logo edu-logo-sies" loading="lazy"
+            <img src="../assets/sies.webp" alt="SIES GST Logo" class="edu-logo edu-logo-sies" loading="lazy"
               decoding="async" />
             <div class="edu-inst">SIES Graduate School of Technology</div>
             <div class="edu-deg">B.E. — Artificial Intelligence &amp; Data Science</div>
@@ -3786,7 +3786,7 @@
             <span class="edu-badge">9.26 CGPA</span>
           </div>
           <div class="edu-card reveal" data-delay="100">
-            <img src="portfolio-web/assets/birla.webp" alt="B.K. Birla College Logo" class="edu-logo" loading="lazy"
+            <img src="../assets/birla.webp" alt="B.K. Birla College Logo" class="edu-logo" loading="lazy"
               decoding="async" />
             <div class="edu-inst">B.K. Birla College</div>
             <div class="edu-deg">HSC — Science Stream</div>
@@ -3795,7 +3795,7 @@
           </div>
           <div class="nss-card reveal" data-delay="200">
             <div class="nss-icon-wrap">
-              <img src="portfolio-web/assets/nss.webp" alt="NSS Logo" class="nss-img" loading="lazy" decoding="async" />
+              <img src="../assets/nss.webp" alt="NSS Logo" class="nss-img" loading="lazy" decoding="async" />
             </div>
             <div>
               <div class="nss-title">NSS Volunteer — Community Leadership</div>
@@ -3818,7 +3818,7 @@
         </div>
         <div class="cert-grid">
           <div class="cert-card reveal" data-delay="0">
-            <img src="portfolio-web/assets/gfg.webp" alt="GeeksforGeeks Logo" class="cert-logo-img" loading="lazy"
+            <img src="../assets/gfg.webp" alt="GeeksforGeeks Logo" class="cert-logo-img" loading="lazy"
               decoding="async" />
             <div class="cert-card-content">
               <div class="cert-name">21 Days, 21 Projects — ML/DS Applied Projects</div>
@@ -3830,7 +3830,7 @@
             </div>
           </div>
           <div class="cert-card reveal" data-delay="80">
-            <img src="portfolio-web/assets/campusX.webp" alt="CampusX Logo" class="cert-logo-img" loading="lazy"
+            <img src="../assets/campusX.webp" alt="CampusX Logo" class="cert-logo-img" loading="lazy"
               decoding="async" />
             <div class="cert-card-content">
               <div class="cert-name">Advanced RAG &amp; LLM Architectures</div>
@@ -3911,7 +3911,7 @@
         <div class="chat-avatar">🤖</div>
         <div class="chat-title-wrap">
           <div class="chat-title">Ask Ratish AI</div>
-          <div class="chat-status"><span class="chat-status-dot"></span> Gemini 3.5 Flash Lite</div>
+          <div class="chat-status"><span class="chat-status-dot"></span> <span id="chat-status-text">Gemini 3.5 Flash Lite</span></div>
         </div>
         <button id="chat-close" class="chat-close" aria-label="Close Chat">&times;</button>
       </div>
@@ -4281,6 +4281,11 @@
 
           const data = await response.json();
           const reply = data.reply || "I didn't catch that. Could you try asking again?";
+
+          if (data.modelUsed) {
+            const statusEl = document.getElementById('chat-status-text');
+            if (statusEl) statusEl.textContent = data.modelUsed;
+          }
 
           appendAiMsg(reply);
 
