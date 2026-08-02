@@ -23,7 +23,7 @@ export default async function handler(req, res) {
       try {
         body = JSON.parse(body);
       } catch (e) {
-        // use raw body
+        // raw body
       }
     }
     body = body || {};
@@ -36,11 +36,11 @@ export default async function handler(req, res) {
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
       return res.status(500).json({ 
-        error: 'API key not configured. Please add GEMINI_API_KEY in Vercel Environment Variables.' 
+        error: 'API key not configured. Please set GEMINI_API_KEY in Vercel Environment Variables.' 
       });
     }
 
-    // RAG System Prompt
+    // System prompt with full RAG knowledge context about Ratish Patil
     const systemInstruction = `You are "Ask Ratish AI", a friendly, professional AI Assistant representing Ratish Patil on his personal portfolio website.
 
 FACTS ABOUT RATISH PATIL:
@@ -97,58 +97,66 @@ BEHAVIOR RULES:
       parts: [{ text: message }]
     });
 
-    // Gemini 3.x models from dashboard
-    const modelNames = [
-      'gemini-3.5-flash-lite',
-      'gemini-3.5-flash',
-      'gemini-3.1-flash-lite',
-      'gemini-3.6-flash',
-      'gemini-3-flash'
+    // Gemini 3.x models in priority order based on AI Studio dashboard limits
+    const gemini3Models = [
+      { ids: ['gemini-3.5-flash-lite', 'gemini-3-5-flash-lite'], label: 'Gemini 3.5 Flash Lite' },
+      { ids: ['gemini-3.1-flash-lite', 'gemini-3-1-flash-lite'], label: 'Gemini 3.1 Flash Lite' },
+      { ids: ['gemini-3.6-flash', 'gemini-3-6-flash'],           label: 'Gemini 3.6 Flash' },
+      { ids: ['gemini-3.5-flash', 'gemini-3-5-flash'],           label: 'Gemini 3.5 Flash' },
+      { ids: ['gemini-3-flash'],                                 label: 'Gemini 3 Flash' }
     ];
 
     const apiVersions = ['v1beta', 'v1alpha'];
     let lastError = null;
     let replyText = null;
+    let successfulModelLabel = 'Gemini 3.5 Flash Lite';
 
     for (const ver of apiVersions) {
-      for (const modelName of modelNames) {
-        const endpoint = `https://generativelanguage.googleapis.com/${ver}/models/${modelName}:generateContent?key=${apiKey}`;
-        try {
-          const response = await fetch(endpoint, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              systemInstruction: {
-                parts: [{ text: systemInstruction }]
-              },
-              contents: contents,
-              generationConfig: {
-                temperature: 0.7,
-                maxOutputTokens: 300
-              }
-            })
-          });
+      for (const modelConfig of gemini3Models) {
+        for (const modelId of modelConfig.ids) {
+          const endpoint = `https://generativelanguage.googleapis.com/${ver}/models/${modelId}:generateContent?key=${apiKey}`;
+          try {
+            const response = await fetch(endpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                systemInstruction: {
+                  parts: [{ text: systemInstruction }]
+                },
+                contents: contents,
+                generationConfig: {
+                  temperature: 0.7,
+                  maxOutputTokens: 220
+                }
+              })
+            });
 
-          const data = await response.json();
-          if (response.ok && data.candidates?.[0]?.content?.parts?.[0]?.text) {
-            replyText = data.candidates[0].content.parts[0].text;
-            break;
-          } else {
-            lastError = data.error?.message || JSON.stringify(data);
-            console.warn(`Attempt ${ver}/${modelName} failed:`, lastError);
+            const data = await response.json();
+            if (response.ok && data.candidates?.[0]?.content?.parts?.[0]?.text) {
+              replyText = data.candidates[0].content.parts[0].text;
+              successfulModelLabel = modelConfig.label;
+              break;
+            } else {
+              lastError = data.error?.message || JSON.stringify(data);
+              console.warn(`Attempt ${ver}/${modelId} failed:`, lastError);
+            }
+          } catch (e) {
+            lastError = e.message;
           }
-        } catch (e) {
-          lastError = e.message;
         }
+        if (replyText) break;
       }
       if (replyText) break;
     }
 
     if (replyText) {
-      return res.status(200).json({ reply: replyText });
+      return res.status(200).json({ 
+        reply: replyText, 
+        modelUsed: successfulModelLabel 
+      });
     } else {
       return res.status(500).json({ 
-        error: `Gemini 3.x API Error: ${lastError || 'Failed to generate response'}` 
+        error: `Gemini 3.x API Error: ${lastError || 'Service temporarily busy'}` 
       });
     }
 
