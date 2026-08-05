@@ -3378,7 +3378,14 @@
     }
 
     .cmd-item:hover,
-    .cmd-item.active {
+    .cmd-item.active,
+    .cmd-item.cmd-focused {
+      background: var(--hover-bg);
+      color: var(--accent);
+    }
+
+    .cmd-item:focus {
+      outline: none;
       background: var(--hover-bg);
       color: var(--accent);
     }
@@ -4245,9 +4252,18 @@
             </button>
           </form>
 
-          <div id="matchmaker-result" class="matchmaker-result">
-            <div id="matchmaker-score-badge" class="matchmaker-score-badge">
-              <span>🎯 Match:</span> <span id="match-pct">--%</span>
+          <div id="matchmaker-result" class="matchmaker-result" style="display:none;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+              <div id="matchmaker-score-badge" class="matchmaker-score-badge">
+                <span>🎯 Match:</span> <span id="match-pct">--%</span>
+              </div>
+              <button
+                onclick="document.getElementById('matchmaker-result').style.display='none'"
+                aria-label="Close evaluation"
+                style="background:none;border:1px solid var(--line);color:var(--muted);width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;line-height:1;transition:border-color 0.2s,color 0.2s;"
+                onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'"
+                onmouseout="this.style.borderColor='var(--line)';this.style.color='var(--muted)'"
+              >&times;</button>
             </div>
             <h3 id="match-headline" style="font-size:18px;font-weight:700;margin-bottom:8px;color:var(--ink);"></h3>
             <p id="match-summary" style="font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:16px;"></p>
@@ -5017,106 +5033,124 @@
         }
       };
 
-      // ── FUZZY FILTER ──────────────────────────────────────────────
-      function getVisibleItems() {
-        return Array.from(document.querySelectorAll('#cmd-list .cmd-item'))
+      // ── COMMAND PALETTE KEYBOARD CONTROLLER ────────────────────────
+      // Single source-of-truth: one keydown listener on the palette
+      // container catches EVERYTHING, whether focus is in the input or
+      // in a list item. This is the same pattern used by Linear / Raycast.
+
+      function getVisibleCmdItems() {
+        return Array.from(document.querySelectorAll('#cmd-list .cmd-item[data-action]'))
           .filter(i => i.style.display !== 'none');
       }
 
       function filterCmdItems(query) {
         const val = (query || '').toLowerCase().trim();
-        let visibleCount = 0;
-        document.querySelectorAll('#cmd-list .cmd-item').forEach(item => {
+        let count = 0;
+        document.querySelectorAll('#cmd-list .cmd-item[data-action]').forEach(item => {
           const txt = (item.textContent || '').toLowerCase();
           const kw  = (item.dataset.keywords || '').toLowerCase();
-          const act = (item.dataset.action  || '').toLowerCase();
+          const act = (item.dataset.action   || '').toLowerCase();
           const hit = !val || txt.includes(val) || kw.includes(val) || act.includes(val);
           item.style.display = hit ? 'flex' : 'none';
-          if (hit) visibleCount++;
+          if (hit) count++;
         });
         const no = document.getElementById('cmd-no-results');
-        if (no) no.style.display = visibleCount === 0 ? 'block' : 'none';
+        if (no) no.style.display = count === 0 ? 'block' : 'none';
       }
 
-      // ── KEYBOARD CONTROLLER ───────────────────────────────────────
+      // Highlight / un-highlight helpers
+      function cmdHighlight(item) {
+        document.querySelectorAll('#cmd-list .cmd-item').forEach(i => i.classList.remove('cmd-focused'));
+        if (item) { item.classList.add('cmd-focused'); item.scrollIntoView({ block: 'nearest' }); }
+      }
+
+      // Track which row is keyboard-highlighted (-1 = input has focus)
+      let cmdFocusedIdx = -1;
+
       const cmdInput = document.getElementById('cmd-input');
+
+      // Sync state when real DOM focus changes
+      document.getElementById('cmd-list')?.addEventListener('focusin', e => {
+        const items = getVisibleCmdItems();
+        const i = items.indexOf(e.target);
+        if (i !== -1) { cmdFocusedIdx = i; cmdHighlight(e.target); }
+      });
+
       if (cmdInput) {
-        cmdInput.addEventListener('input', e => filterCmdItems(e.target.value));
-
-        cmdInput.addEventListener('keydown', e => {
-          const items = getVisibleItems();
-          if (!items.length) return;
-
-          if (e.key === 'ArrowDown') {
-            e.preventDefault();
-            items[0].focus();
-          } else if (e.key === 'Tab' && !e.shiftKey) {
-            e.preventDefault();            // stop browser stealing Tab
-            items[0].focus();
-          } else if (e.key === 'Tab' && e.shiftKey) {
-            e.preventDefault();
-            items[items.length - 1].focus();
-          } else if (e.key === 'Enter') {
-            e.preventDefault();
-            const act = items[0].dataset.action;
-            if (act) window.execCmd(act);
-          }
+        cmdInput.addEventListener('focusin', () => { cmdFocusedIdx = -1; cmdHighlight(null); });
+        cmdInput.addEventListener('input',   e => {
+          cmdFocusedIdx = -1;
+          filterCmdItems(e.target.value);
         });
       }
 
-      // Trap focus inside the list — never escape to browser chrome
-      const cmdListEl = document.getElementById('cmd-list');
-      if (cmdListEl) {
-        cmdListEl.addEventListener('keydown', e => {
-          const items = getVisibleItems();
-          const idx   = items.indexOf(document.activeElement);
-          if (idx === -1) return;
+      // Single unified keydown listener on the palette backdrop
+      const _palEl = document.getElementById('cmd-palette');
+      if (_palEl) {
+        _palEl.addEventListener('keydown', e => {
+          if (!_palEl.classList.contains('open')) return;
+          const items = getVisibleCmdItems();
+          const total = items.length;
 
           if (e.key === 'ArrowDown') {
             e.preventDefault();
-            // wrap-around: last item → back to first
-            items[(idx + 1) % items.length].focus();
+            if (total === 0) return;
+            if (cmdFocusedIdx < total - 1) cmdFocusedIdx++;
+            else cmdFocusedIdx = 0;        // wrap to first
+            cmdHighlight(items[cmdFocusedIdx]);
+            items[cmdFocusedIdx].focus();
 
           } else if (e.key === 'ArrowUp') {
             e.preventDefault();
-            if (idx === 0) {
-              cmdInput?.focus();           // top → back to search box
+            if (total === 0) return;
+            if (cmdFocusedIdx <= 0) {
+              cmdFocusedIdx = -1;
+              cmdHighlight(null);
+              cmdInput?.focus();
             } else {
-              items[idx - 1].focus();
+              cmdFocusedIdx--;
+              cmdHighlight(items[cmdFocusedIdx]);
+              items[cmdFocusedIdx].focus();
             }
 
           } else if (e.key === 'Tab' && !e.shiftKey) {
             e.preventDefault();
-            if (idx === items.length - 1) {
-              cmdInput?.focus();           // last item Tab → wrap to input
-            } else {
-              items[idx + 1].focus();
-            }
+            if (total === 0) return;
+            if (cmdFocusedIdx < total - 1) cmdFocusedIdx++;
+            else { cmdFocusedIdx = -1; cmdHighlight(null); cmdInput?.focus(); return; }
+            cmdHighlight(items[cmdFocusedIdx]);
+            items[cmdFocusedIdx].focus();
 
           } else if (e.key === 'Tab' && e.shiftKey) {
             e.preventDefault();
-            if (idx === 0) {
-              cmdInput?.focus();           // first item Shift+Tab → back to input
+            if (total === 0) return;
+            if (cmdFocusedIdx <= 0) {
+              cmdFocusedIdx = total - 1;
+              cmdHighlight(items[cmdFocusedIdx]);
+              items[cmdFocusedIdx].focus();
             } else {
-              items[idx - 1].focus();
+              cmdFocusedIdx--;
+              cmdHighlight(items[cmdFocusedIdx]);
+              items[cmdFocusedIdx].focus();
             }
 
           } else if (e.key === 'Enter') {
             e.preventDefault();
-            const act = items[idx].dataset.action;
-            if (act) window.execCmd(act);
+            if (cmdFocusedIdx >= 0 && items[cmdFocusedIdx]) {
+              window.execCmd(items[cmdFocusedIdx].dataset.action);
+            } else if (total > 0) {
+              window.execCmd(items[0].dataset.action);  // Enter with no highlight → run first result
+            }
 
           } else if (e.key === 'Escape') {
             e.preventDefault();
             window.toggleCmdPalette(false);
 
-          } else {
-            // Any printable character: redirect typing back to search input
-            if (e.key.length === 1 && !e.ctrlKey && !e.metaKey) {
-              cmdInput?.focus();
-            }
+          } else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && e.target !== cmdInput) {
+            // User typed a letter while focused on a list item → redirect to input
+            cmdInput?.focus();
           }
-        });
+        }, true); // capture phase so we get it before individual element handlers
       }
 
       window.insertSampleJD = function () {
