@@ -1603,7 +1603,7 @@
       background: var(--accent);
       border-radius: 100px;
       width: 0%;
-      transition: width 1.3s cubic-bezier(.22, .68, 0, 1);
+      transition: width 2.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     /* PART 2: Dual Tech Carousel */
@@ -3138,6 +3138,331 @@
         height: 440px;
       }
     }
+
+    /* ─── WORK SECTION CONTAINER (Standard 1140px) ─── */
+    .work-container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* ─── HERO NEURAL CANVAS ─── */
+    #hero-neural-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── 3D CARD FLIP ─── */
+    .card-flip-wrap {
+      perspective: 1200px;
+      width: 100%;
+    }
+
+    .card-flip-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+
+    .card-flip-inner.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .card-front,
+    .card-back {
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 24px;
+    }
+
+    .card-front {
+      position: relative;
+      z-index: 2;
+    }
+
+    .card-back {
+      position: absolute;
+      inset: 0;
+      transform: rotateY(180deg);
+      background: var(--surface);
+      border: 1px solid var(--accent);
+      padding: 32px;
+      border-radius: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 12px 40px rgba(16, 185, 129, 0.15);
+      z-index: 1;
+      overflow-y: auto;
+    }
+
+    .arch-title {
+      font-family: var(--f-display);
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .arch-specs-list {
+      list-style: none;
+      padding: 0;
+      margin: 14px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .arch-specs-list li {
+      font-size: 15px;
+      color: var(--ink);
+      line-height: 1.75;
+      padding-left: 24px;
+      position: relative;
+    }
+
+    .arch-specs-list li::before {
+      content: "⚡";
+      position: absolute;
+      left: 0;
+      top: 2px;
+      font-size: 13px;
+    }
+
+    .card-links-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-top: 16px;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .card-links-stacked {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .btn-flip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 7px 14px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 16px;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+    }
+
+    .btn-flip:hover {
+      background: var(--accent);
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    /* ─── COMMAND PALETTE ─── */
+    .cmd-k-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      padding: 5px 12px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s, border-color .2s;
+    }
+
+    .cmd-k-badge:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .cmd-palette-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 99999;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 100px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .cmd-palette-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .cmd-palette-box {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      width: 90%;
+      max-width: 580px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      transform: scale(0.95);
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .cmd-palette-backdrop.open .cmd-palette-box {
+      transform: scale(1);
+    }
+
+    .cmd-input-row {
+      display: flex;
+      align-items: center;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--line);
+      gap: 12px;
+    }
+
+    .cmd-input-row svg {
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .cmd-input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--ink);
+      font-size: 16px;
+      width: 100%;
+      font-family: inherit;
+    }
+
+    .cmd-list {
+      max-height: 320px;
+      overflow-y: auto;
+      padding: 8px;
+    }
+
+    .cmd-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .cmd-item:hover,
+    .cmd-item.active {
+      background: var(--hover-bg);
+      color: var(--accent);
+    }
+
+    .cmd-item-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cmd-item-key {
+      font-size: 11px;
+      font-family: var(--f-mono);
+      background: var(--bg2);
+      padding: 3px 7px;
+      border-radius: 6px;
+      color: var(--muted);
+      border: 1px solid var(--line);
+    }
+
+    /* ─── AI RECRUITER MATCHMAKER WIDGET ─── */
+    .matchmaker-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 36px;
+      margin-top: 40px;
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .matchmaker-card::before {
+      display: none;
+    }
+
+    .matchmaker-card {
+      border-top: 2px solid var(--line) !important;
+    }
+
+    .matchmaker-textarea {
+      width: 100%;
+      min-height: 120px;
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 14px;
+      line-height: 1.5;
+      resize: vertical;
+      outline: none;
+      margin: 16px 0;
+      transition: border-color 0.2s;
+    }
+
+    .matchmaker-textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .matchmaker-result {
+      margin-top: 24px;
+      padding: 24px;
+      background: var(--bg2);
+      border-radius: 20px;
+      border: 1px solid var(--accent);
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .matchmaker-score-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #ffffff;
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-family: var(--f-mono);
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
   </style>
 </head>
 
@@ -3158,6 +3483,11 @@
         <a href="#contact">Contact</a>
       </div>
       <div class="nav-right">
+        <button id="cmd-k-trigger" class="cmd-k-badge" onclick="toggleCmdPalette(true)" aria-label="Quick Actions">
+          <kbd
+            style="font-family:var(--f-mono);font-size:10px;background:var(--bg2);padding:2px 5px;border-radius:4px;">⌘K</kbd>
+          <span class="cmd-k-text">Actions</span>
+        </button>
         <button class="theme-btn" id="theme-toggle" aria-label="Toggle dark mode">
           <svg id="theme-icon" viewBox="0 0 24 24">
             <path id="sun-path"
@@ -3187,6 +3517,7 @@
      HERO
 ════════════════════════════════════ -->
     <section id="hero" aria-labelledby="hero-heading">
+      <canvas id="hero-neural-canvas"></canvas>
       <div class="orb orb-1" aria-hidden="true"></div>
       <div class="orb orb-2" aria-hidden="true"></div>
       <div class="hero-inner">
@@ -3247,7 +3578,7 @@
                   <stop offset="100%" stop-color="#064e3b" stop-opacity=".4" />
                 </radialGradient>
               </defs>
-              <g stroke="#10b981" stroke-width="1.5" opacity=".3">
+              <g stroke="#10b981" stroke-width="1.5" opacity=".35">
                 <line x1="180" y1="180" x2="90" y2="100" />
                 <line x1="180" y1="180" x2="270" y2="100" />
                 <line x1="180" y1="180" x2="80" y2="260" />
@@ -3272,29 +3603,29 @@
               <circle cx="180" cy="180" r="10" fill="url(#nodeGrad)" opacity=".9">
                 <animate attributeName="r" values="10;14;10" dur="2.5s" repeatCount="indefinite" />
               </circle>
-              <circle cx="90" cy="100" r="6" fill="#10b981" opacity=".7">
-                <animate attributeName="r" values="6;8;6" dur="3s" begin=".5s" repeatCount="indefinite" />
+              <circle cx="90" cy="100" r="6" fill="#10b981" opacity=".8">
+                <animate attributeName="r" values="6;9;6" dur="3s" begin=".5s" repeatCount="indefinite" />
               </circle>
-              <circle cx="270" cy="100" r="6" fill="#10b981" opacity=".7">
-                <animate attributeName="r" values="6;8;6" dur="3.5s" begin="1s" repeatCount="indefinite" />
+              <circle cx="270" cy="100" r="6" fill="#10b981" opacity=".8">
+                <animate attributeName="r" values="6;9;6" dur="3.5s" begin="1s" repeatCount="indefinite" />
               </circle>
-              <circle cx="80" cy="260" r="6" fill="#3b82f6" opacity=".7">
-                <animate attributeName="r" values="6;8;6" dur="4s" begin=".2s" repeatCount="indefinite" />
+              <circle cx="80" cy="260" r="6" fill="#3b82f6" opacity=".8">
+                <animate attributeName="r" values="6;9;6" dur="4s" begin=".2s" repeatCount="indefinite" />
               </circle>
-              <circle cx="280" cy="260" r="6" fill="#3b82f6" opacity=".7">
-                <animate attributeName="r" values="6;8;6" dur="3.2s" begin=".8s" repeatCount="indefinite" />
+              <circle cx="280" cy="260" r="6" fill="#3b82f6" opacity=".8">
+                <animate attributeName="r" values="6;9;6" dur="3.2s" begin=".8s" repeatCount="indefinite" />
               </circle>
-              <circle cx="180" cy="60" r="5" fill="#10b981" opacity=".6">
-                <animate attributeName="r" values="5;7;5" dur="4.5s" begin=".3s" repeatCount="indefinite" />
+              <circle cx="180" cy="60" r="5" fill="#10b981" opacity=".7">
+                <animate attributeName="r" values="5;8;5" dur="4.5s" begin=".3s" repeatCount="indefinite" />
               </circle>
-              <circle cx="180" cy="300" r="5" fill="#10b981" opacity=".6">
-                <animate attributeName="r" values="5;7;5" dur="3.8s" begin="1.2s" repeatCount="indefinite" />
+              <circle cx="180" cy="300" r="5" fill="#10b981" opacity=".7">
+                <animate attributeName="r" values="5;8;5" dur="3.8s" begin="1.2s" repeatCount="indefinite" />
               </circle>
-              <circle cx="60" cy="180" r="5" fill="#3b82f6" opacity=".6">
-                <animate attributeName="r" values="5;7;5" dur="5s" begin=".6s" repeatCount="indefinite" />
+              <circle cx="60" cy="180" r="5" fill="#3b82f6" opacity=".7">
+                <animate attributeName="r" values="5;8;5" dur="5s" begin=".6s" repeatCount="indefinite" />
               </circle>
-              <circle cx="300" cy="180" r="5" fill="#3b82f6" opacity=".6">
-                <animate attributeName="r" values="5;7;5" dur="3.3s" begin="1.5s" repeatCount="indefinite" />
+              <circle cx="300" cy="180" r="5" fill="#3b82f6" opacity=".7">
+                <animate attributeName="r" values="5;8;5" dur="3.3s" begin="1.5s" repeatCount="indefinite" />
               </circle>
               <circle r="4" fill="#10b981" opacity=".9">
                 <animateMotion dur="3s" repeatCount="indefinite" path="M180,180 L90,100 L270,100 L180,180" />
@@ -3303,7 +3634,7 @@
                 <animateMotion dur="4s" repeatCount="indefinite" begin="1.5s"
                   path="M180,180 L80,260 L280,260 L180,180" />
               </circle>
-              <circle r="3" fill="#10b981" opacity=".8">
+              <circle r="3" fill="#10b981" opacity=".85">
                 <animateMotion dur="5s" repeatCount="indefinite" begin=".8s"
                   path="M180,60 L90,100 L180,180 L270,100 L180,60" />
               </circle>
@@ -3311,8 +3642,8 @@
             <div class="hv-chip chip-c1">
               <div class="chip-dot green"></div>
               <div>
-                <div class="chip-label">Status</div>
-                <div class="chip-val">Open to Work</div>
+                <div class="chip-label">Academics</div>
+                <div class="chip-val">9.26 CGPA</div>
               </div>
             </div>
             <div class="hv-chip chip-c2">
@@ -3428,7 +3759,7 @@
      PROJECTS — TIMELINE
 ════════════════════════════════════ -->
     <section id="projects" class="section" aria-labelledby="projects-heading">
-      <div class="container">
+      <div class="work-container">
         <div class="projects-hd reveal">
           <span class="eyebrow">// selected work</span>
           <h2 class="section-title" id="projects-heading">What I've Built</h2>
@@ -3440,35 +3771,63 @@
           <!-- PROJECT 1: KrishiSetu -->
           <div class="tl-item tl-left">
             <div class="tl-card-col rl">
-              <div class="tl-card">
-                <div class="card-tags-row">
-                  <span class="ctag">NODE.JS</span><span class="ctag">REACT</span>
-                  <span class="ctag">RAG</span><span class="ctag">YOLOV8-CLS</span>
-                  <span class="ctag">FASTAPI</span><span class="ctag">GEMINI API</span>
-                  <span class="ctag">TESSERACT OCR</span><span class="ctag">DOCKER</span>
-                </div>
-                <h3 class="card-name">KrishiSetu</h3>
-                <p class="card-when">JAN 2026 — PRESENT</p>
-                <ul class="card-pts">
-                  <li>Custom YOLOv8-cls model trained on 22K+ images to diagnose 24 distinct crop diseases with 98%
-                    accuracy (efficient CPU inference).</li>
-                  <li>Multilingual conversational AI voice assistant enabling hands-free navigation and instant
-                    eligibility checks for government schemes.</li>
-                  <li>Automated OCR pipeline parsing land records (7/12 documents) integrated with an LLM matchmaker and
-                    RAG workflow for custom PDF reports.</li>
-                  <li>Google News API scraper integration for real-time agricultural updates (Taaza Khabar) and offline
-                    SMS webhook delivery.</li>
-                </ul>
-                <div class="card-chips">
-                  <span class="cchip">98% CV Accuracy</span>
-                  <span class="cchip">Taaza Khabar Ingestion</span>
-                  <span class="cchip">OCR &amp; RAG Pipeline</span>
-                </div>
-                <div class="card-links">
-                  <a href="https://krishisetu-4b5y.onrender.com/" target="_blank" rel="noopener" class="clink">Live Demo
-                    →</a>
-                  <a href="https://github.com/RatishPatil37/KRISHISETU" target="_blank" rel="noopener"
-                    class="clink">GitHub →</a>
+              <div class="card-flip-wrap">
+                <div class="card-flip-inner">
+                  <div class="card-front">
+                    <div class="tl-card">
+                      <div class="card-tags-row">
+                        <span class="ctag">NODE.JS</span><span class="ctag">REACT</span>
+                        <span class="ctag">RAG</span><span class="ctag">YOLOV8-CLS</span>
+                        <span class="ctag">FASTAPI</span><span class="ctag">GEMINI API</span>
+                        <span class="ctag">TESSERACT OCR</span><span class="ctag">DOCKER</span>
+                      </div>
+                      <h3 class="card-name">KrishiSetu</h3>
+                      <p class="card-when">JAN 2026 — PRESENT</p>
+                      <ul class="card-pts">
+                        <li>Custom YOLOv8-cls model trained on 22K+ images to diagnose 24 distinct crop diseases with
+                          98%
+                          accuracy (efficient CPU inference).</li>
+                        <li>Multilingual conversational AI voice assistant enabling hands-free navigation and instant
+                          eligibility checks for government schemes.</li>
+                        <li>Automated OCR pipeline parsing land records (7/12 documents) integrated with an LLM
+                          matchmaker and
+                          RAG workflow for custom PDF reports.</li>
+                        <li>Google News API scraper integration for real-time agricultural updates (Taaza Khabar) and
+                          offline
+                          SMS webhook delivery.</li>
+                      </ul>
+                      <div class="card-chips">
+                        <span class="cchip">98% CV Accuracy</span>
+                        <span class="cchip">Taaza Khabar Ingestion</span>
+                        <span class="cchip">OCR &amp; RAG Pipeline</span>
+                      </div>
+                      <div class="card-links-row">
+                        <div class="card-links-stacked">
+                          <a href="https://krishisetu-4b5y.onrender.com/" target="_blank" rel="noopener"
+                            class="clink">Live Demo →</a>
+                          <a href="https://github.com/RatishPatil37/KRISHISETU" target="_blank" rel="noopener"
+                            class="clink">GitHub →</a>
+                        </div>
+                        <button class="btn-flip" onclick="flipCard(this)">View Architecture</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-back">
+                    <div>
+                      <div class="arch-title">⚡ KrishiSetu System Architecture</div>
+                      <ul class="arch-specs-list">
+                        <li><strong>CV Pipeline:</strong> Custom YOLOv8-cls trained on 22K+ dataset (24 crop diseases,
+                          98% CPU accuracy).</li>
+                        <li><strong>RAG &amp; OCR Engine:</strong> Tesseract OCR parses 7/12 land records into LLM
+                          matchmaker &amp; automated PDF generator.</li>
+                        <li><strong>Voice Assistant:</strong> Multilingual conversational voice AI with scheme
+                          eligibility checking.</li>
+                        <li><strong>Live Telemetry:</strong> Google News API scraper (Taaza Khabar) with offline SMS
+                          webhook alerts.</li>
+                      </ul>
+                    </div>
+                    <button class="btn-flip" onclick="flipCard(this)">↩ Back to Overview</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -3493,32 +3852,59 @@
               <div class="tl-dot"></div>
             </div>
             <div class="tl-card-col rr">
-              <div class="tl-card">
-                <div class="card-tags-row">
-                  <span class="ctag">RASPBERRY PI 4B</span><span class="ctag">YOLOV4-TINY</span>
-                  <span class="ctag">OPENCV</span><span class="ctag">TESSERACT OCR</span>
-                  <span class="ctag">OLLAMA</span><span class="ctag">PYTHON</span>
-                </div>
-                <h3 class="card-name">Smart Sight</h3>
-                <p class="card-when">AUG 2025 — NOV 2025</p>
-                <ul class="card-pts">
-                  <li>Standalone, multimodal Edge-AI navigation system deployed on a 4GB RAM Raspberry Pi 4B with
-                    real-time computer vision and local NLP.</li>
-                  <li>Optimized YOLOv4-tiny and OpenCV pipeline for low-latency obstacle detection alongside Tesseract
-                    OCR for text recognition.</li>
-                  <li>Fully offline local voice assistant running TinyLlama and faster_whisper completely on-device for
-                    speech-to-text and intent.</li>
-                  <li>Engineered CloudCam to automatically sync captured photos directly to the user's Microsoft
-                    OneDrive account.</li>
-                </ul>
-                <div class="card-chips">
-                  <span class="cchip">10 FPS Edge</span>
-                  <span class="cchip">4GB RAM RPi 4B</span>
-                  <span class="cchip">CloudCam (OneDrive)</span>
-                </div>
-                <div class="card-links">
-                  <a href="https://github.com/RatishPatil37/SmartSight" target="_blank" rel="noopener"
-                    class="clink">GitHub →</a>
+              <div class="card-flip-wrap">
+                <div class="card-flip-inner">
+                  <div class="card-front">
+                    <div class="tl-card">
+                      <div class="card-tags-row">
+                        <span class="ctag">RASPBERRY PI 4B</span><span class="ctag">YOLOV4-TINY</span>
+                        <span class="ctag">OPENCV</span><span class="ctag">TESSERACT OCR</span>
+                        <span class="ctag">OLLAMA</span><span class="ctag">PYTHON</span>
+                      </div>
+                      <h3 class="card-name">Smart Sight</h3>
+                      <p class="card-when">AUG 2025 — NOV 2025</p>
+                      <ul class="card-pts">
+                        <li>Standalone, multimodal Edge-AI navigation system deployed on a 4GB RAM Raspberry Pi 4B with
+                          real-time computer vision and local NLP.</li>
+                        <li>Optimized YOLOv4-tiny and OpenCV pipeline for low-latency obstacle detection alongside
+                          Tesseract
+                          OCR for text recognition.</li>
+                        <li>Fully offline local voice assistant running TinyLlama and faster_whisper completely
+                          on-device for
+                          speech-to-text and intent.</li>
+                        <li>Engineered CloudCam to automatically sync captured photos directly to the user's Microsoft
+                          OneDrive account.</li>
+                      </ul>
+                      <div class="card-chips">
+                        <span class="cchip">10 FPS Edge</span>
+                        <span class="cchip">4GB RAM RPi 4B</span>
+                        <span class="cchip">CloudCam (OneDrive)</span>
+                      </div>
+                      <div class="card-links-row">
+                        <div class="card-links-stacked">
+                          <a href="https://github.com/RatishPatil37/SmartSight" target="_blank" rel="noopener"
+                            class="clink">GitHub →</a>
+                        </div>
+                        <button class="btn-flip" onclick="flipCard(this)">View Architecture</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-back">
+                    <div>
+                      <div class="arch-title">⚡ Smart Sight Edge Architecture</div>
+                      <ul class="arch-specs-list">
+                        <li><strong>Edge Compute:</strong> Raspberry Pi 4B (4GB RAM) running lightweight headless Linux
+                          OS.</li>
+                        <li><strong>Vision Model:</strong> YOLOv4-tiny + OpenCV executing 10 FPS obstacle detection.
+                        </li>
+                        <li><strong>Offline Voice &amp; LLM:</strong> On-device TinyLlama &amp; faster_whisper (Zero
+                          cloud dependency).</li>
+                        <li><strong>Telemetry Sync:</strong> CloudCam background thread uploading snapshots to OneDrive.
+                        </li>
+                      </ul>
+                    </div>
+                    <button class="btn-flip" onclick="flipCard(this)">↩ Back to Overview</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -3527,29 +3913,55 @@
           <!-- PROJECT 3: Review Insight -->
           <div class="tl-item tl-left">
             <div class="tl-card-col rl">
-              <div class="tl-card">
-                <div class="card-tags-row">
-                  <span class="ctag">PYTHON</span><span class="ctag">BEAUTIFULSOUP</span>
-                  <span class="ctag">SELENIUM</span><span class="ctag">SCIKIT-LEARN</span>
-                  <span class="ctag">STREAMLIT</span>
-                </div>
-                <h3 class="card-name">Review Insight Navigator</h3>
-                <p class="card-when">FEB 2025 — APR 2025</p>
-                <ul class="card-pts">
-                  <li>Built an automated web scraper using BeautifulSoup and Selenium to extract product reviews and
-                    price history across 30+ Amazon listings.</li>
-                  <li>Applied NLP-based sentiment classification using Scikit-learn to categorize reviews with 85%
-                    accuracy.</li>
-                  <li>Visualized price trends and sentiment breakdowns via Matplotlib and deployed on Streamlit for
-                    end-user exploration.</li>
-                </ul>
-                <div class="card-chips">
-                  <span class="cchip">85% Accuracy</span>
-                  <span class="cchip">30+ Amazon Listings</span>
-                  <span class="cchip">Matplotlib Vis</span>
-                </div>
-                <div class="card-links">
-                  <a href="https://github.com/RatishPatil37" target="_blank" rel="noopener" class="clink">GitHub →</a>
+              <div class="card-flip-wrap">
+                <div class="card-flip-inner">
+                  <div class="card-front">
+                    <div class="tl-card">
+                      <div class="card-tags-row">
+                        <span class="ctag">PYTHON</span><span class="ctag">BEAUTIFULSOUP</span>
+                        <span class="ctag">SELENIUM</span><span class="ctag">SCIKIT-LEARN</span>
+                        <span class="ctag">STREAMLIT</span>
+                      </div>
+                      <h3 class="card-name">Review Insight Navigator</h3>
+                      <p class="card-when">FEB 2025 — APR 2025</p>
+                      <ul class="card-pts">
+                        <li>Built an automated web scraper using BeautifulSoup and Selenium to extract product reviews
+                          and
+                          price history across 30+ Amazon listings.</li>
+                        <li>Applied NLP-based sentiment classification using Scikit-learn to categorize reviews with 85%
+                          accuracy.</li>
+                        <li>Visualized price trends and sentiment breakdowns via Matplotlib and deployed on Streamlit
+                          for
+                          end-user exploration.</li>
+                      </ul>
+                      <div class="card-chips">
+                        <span class="cchip">85% Accuracy</span>
+                        <span class="cchip">30+ Amazon Listings</span>
+                        <span class="cchip">Matplotlib Vis</span>
+                      </div>
+                      <div class="card-links-row">
+                        <div class="card-links-stacked">
+                          <a href="https://github.com/RatishPatil37" target="_blank" rel="noopener" class="clink">GitHub
+                            →</a>
+                        </div>
+                        <button class="btn-flip" onclick="flipCard(this)">View Architecture</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-back">
+                    <div>
+                      <div class="arch-title">⚡ Review Insight Architecture</div>
+                      <ul class="arch-specs-list">
+                        <li><strong>Scraper Pipeline:</strong> Selenium &amp; BeautifulSoup extracting 30+ Amazon
+                          listings.</li>
+                        <li><strong>NLP Engine:</strong> Scikit-Learn TF-IDF vectorizer with 85% sentiment
+                          classification.</li>
+                        <li><strong>Analytics Dashboard:</strong> Streamlit interactive frontend with Matplotlib word
+                          clouds.</li>
+                      </ul>
+                    </div>
+                    <button class="btn-flip" onclick="flipCard(this)">↩ Back to Overview</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -3591,28 +4003,54 @@
               <div class="tl-dot"></div>
             </div>
             <div class="tl-card-col rr">
-              <div class="tl-card">
-                <div class="card-tags-row">
-                  <span class="ctag">RASPBERRY PI 4B</span><span class="ctag">NEO-M8N GPS</span>
-                  <span class="ctag">FIREBASE</span><span class="ctag">SYSTEMD</span><span class="ctag">LTE</span>
-                </div>
-                <h3 class="card-name">IoT Vehicle Tracker</h3>
-                <p class="card-when">MAR 2026 — PRESENT</p>
-                <ul class="card-pts">
-                  <li>Standalone Edge tracking system with real-time GPS telemetry and secure Firebase synchronization.
-                  </li>
-                  <li>High-frequency 5-second GPS refresh cycle, systemd-hardened for headless deployment in rugged
-                    environments.</li>
-                  <li>Optimized LTE network data ingestion pipeline achieving &lt;1s upload latency to Firebase Realtime
-                    Database.</li>
-                </ul>
-                <div class="card-chips">
-                  <span class="cchip">&lt;1s Latency</span>
-                  <span class="cchip">Live Telemetry</span>
-                  <span class="cchip">Field-Ready</span>
-                </div>
-                <div class="card-links">
-                  <a href="https://github.com/RatishPatil37" target="_blank" rel="noopener" class="clink">GitHub →</a>
+              <div class="card-flip-wrap">
+                <div class="card-flip-inner">
+                  <div class="card-front">
+                    <div class="tl-card">
+                      <div class="card-tags-row">
+                        <span class="ctag">RASPBERRY PI 4B</span><span class="ctag">NEO-M8N GPS</span>
+                        <span class="ctag">FIREBASE</span><span class="ctag">SYSTEMD</span><span class="ctag">LTE</span>
+                      </div>
+                      <h3 class="card-name">IoT Vehicle Tracker</h3>
+                      <p class="card-when">MAR 2026 — PRESENT</p>
+                      <ul class="card-pts">
+                        <li>Standalone Edge tracking system with real-time GPS telemetry and secure Firebase
+                          synchronization.</li>
+                        <li>High-frequency 5-second GPS refresh cycle, systemd-hardened for headless deployment in
+                          rugged
+                          environments.</li>
+                        <li>Optimized LTE network data ingestion pipeline achieving &lt;1s upload latency to Firebase
+                          Realtime
+                          Database.</li>
+                      </ul>
+                      <div class="card-chips">
+                        <span class="cchip">&lt;1s Latency</span>
+                        <span class="cchip">Live Telemetry</span>
+                        <span class="cchip">Field-Ready</span>
+                      </div>
+                      <div class="card-links-row">
+                        <div class="card-links-stacked">
+                          <a href="https://github.com/RatishPatil37" target="_blank" rel="noopener" class="clink">GitHub
+                            →</a>
+                        </div>
+                        <button class="btn-flip" onclick="flipCard(this)">View Architecture</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-back">
+                    <div>
+                      <div class="arch-title">⚡ IoT Tracker Architecture</div>
+                      <ul class="arch-specs-list">
+                        <li><strong>GPS Hardware:</strong> NEO-M8N GPS module with UART serial interface on Raspberry Pi
+                          4B.</li>
+                        <li><strong>Service Daemon:</strong> Python systemd service with auto-recovery &amp; boot
+                          initialization.</li>
+                        <li><strong>Cloud Telemetry:</strong> Firebase Realtime Database with &lt;1s end-to-end sync
+                          latency.</li>
+                      </ul>
+                    </div>
+                    <button class="btn-flip" onclick="flipCard(this)">↩ Back to Overview</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -3635,42 +4073,43 @@
         <!-- PART 1: Skill Bars -->
         <div class="skills-bars-grid" id="bars-grid">
           <div class="sb-item reveal" data-delay="0">
-            <div class="sb-header"><span class="sb-name">Python &amp; ML Engineering</span><span
-                class="sb-pct">90%</span></div>
+            <div class="sb-header"><span class="sb-name">Python &amp; ML Engineering</span><span class="sb-pct"
+                data-target="90">0%</span></div>
             <div class="sb-track">
               <div class="sb-fill" data-w="90"></div>
             </div>
           </div>
           <div class="sb-item reveal" data-delay="60">
-            <div class="sb-header"><span class="sb-name">LLMs &amp; RAG Architectures</span><span
-                class="sb-pct">85%</span></div>
+            <div class="sb-header"><span class="sb-name">LLMs &amp; RAG Architectures</span><span class="sb-pct"
+                data-target="85">0%</span></div>
             <div class="sb-track">
               <div class="sb-fill" data-w="85"></div>
             </div>
           </div>
           <div class="sb-item reveal" data-delay="120">
-            <div class="sb-header"><span class="sb-name">React / Full-Stack Development</span><span
-                class="sb-pct">82%</span></div>
+            <div class="sb-header"><span class="sb-name">React / Full-Stack Development</span><span class="sb-pct"
+                data-target="82">0%</span></div>
             <div class="sb-track">
               <div class="sb-fill" data-w="82"></div>
             </div>
           </div>
           <div class="sb-item reveal" data-delay="180">
-            <div class="sb-header"><span class="sb-name">Computer Vision (CV)</span><span class="sb-pct">80%</span>
-            </div>
+            <div class="sb-header"><span class="sb-name">Computer Vision (CV)</span><span class="sb-pct"
+                data-target="80">0%</span></div>
             <div class="sb-track">
               <div class="sb-fill" data-w="80"></div>
             </div>
           </div>
           <div class="sb-item reveal" data-delay="240">
-            <div class="sb-header"><span class="sb-name">Cloud &amp; Deployment</span><span class="sb-pct">75%</span>
-            </div>
+            <div class="sb-header"><span class="sb-name">Cloud &amp; Deployment</span><span class="sb-pct"
+                data-target="75">0%</span></div>
             <div class="sb-track">
               <div class="sb-fill" data-w="75"></div>
             </div>
           </div>
           <div class="sb-item reveal" data-delay="300">
-            <div class="sb-header"><span class="sb-name">AI Agent Frameworks</span><span class="sb-pct">78%</span></div>
+            <div class="sb-header"><span class="sb-name">AI Agent Frameworks</span><span class="sb-pct"
+                data-target="78">0%</span></div>
             <div class="sb-track">
               <div class="sb-fill" data-w="78"></div>
             </div>
@@ -3764,6 +4203,61 @@
           <span class="kw-pill">Data Pipelines</span>
           <span class="kw-pill">System Design</span>
           <span class="kw-pill">RAG Architecture</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════
+     AI RECRUITER MATCHMAKER WIDGET
+════════════════════════════════════ -->
+    <section id="matchmaker" class="section" aria-labelledby="matchmaker-heading">
+      <div class="container">
+        <div class="matchmaker-card reveal">
+          <span class="eyebrow">// Recruiter Tools</span>
+          <h2 class="section-title" id="matchmaker-heading">AI Job Matchmaker</h2>
+          <p style="color:var(--muted);font-size:15px;margin-top:8px;">
+            Paste any Job Description (JD) below to run an instant semantic match against Ratish's engineering profile,
+            skills, and shipped projects.
+          </p>
+
+          <form id="matchmaker-form" onsubmit="handleMatchmakerSubmit(event)">
+            <div
+              style="display:flex;align-items:center;justify-content:space-between;margin-top:16px;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
+              <span
+                style="font-size:12px;font-family:var(--f-mono);text-transform:uppercase;color:var(--accent);font-weight:700;">Job
+                Description Input</span>
+              <div style="display:flex;gap:8px;align-items:center;">
+                <button type="button" class="btn-ghost" onclick="insertSampleJD()"
+                  style="font-size:12px;padding:4px 10px;border-radius:8px;cursor:pointer;">
+                  + Add Sample JD
+                </button>
+                <button type="button" class="btn-ghost" onclick="clearMatchmakerJD()"
+                  style="font-size:12px;padding:4px 10px;border-radius:8px;cursor:pointer;color:var(--muted);">
+                  Clear
+                </button>
+              </div>
+            </div>
+            <textarea id="matchmaker-input" class="matchmaker-textarea"
+              placeholder="Paste Job Description here (e.g. Seeking an ML Engineer with PyTorch, RAG, and FastAPI experience...)"
+              required></textarea>
+            <button type="submit" id="matchmaker-btn" class="btn-fill" style="border:none;cursor:pointer;">
+              <span>Analyze Match ⚡</span>
+            </button>
+          </form>
+
+          <div id="matchmaker-result" class="matchmaker-result">
+            <div id="matchmaker-score-badge" class="matchmaker-score-badge">
+              <span>🎯 Match:</span> <span id="match-pct">--%</span>
+            </div>
+            <h3 id="match-headline" style="font-size:18px;font-weight:700;margin-bottom:8px;color:var(--ink);"></h3>
+            <p id="match-summary" style="font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:16px;"></p>
+            <div style="margin-top:12px;">
+              <div
+                style="font-size:12px;font-family:var(--f-mono);text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:8px;">
+                Matching Core Skills</div>
+              <div id="match-skills" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -3912,7 +4406,8 @@
         <div class="chat-avatar">🤖</div>
         <div class="chat-title-wrap">
           <div class="chat-title">Ask Ratish AI</div>
-          <div class="chat-status"><span class="chat-status-dot"></span> <span id="chat-status-text">Gemini 3.5 Flash Lite</span></div>
+          <div class="chat-status"><span class="chat-status-dot"></span> <span id="chat-status-text">Gemini 3.5 Flash
+              Lite</span></div>
         </div>
         <button id="chat-close" class="chat-close" aria-label="Close Chat">&times;</button>
       </div>
@@ -4317,8 +4812,436 @@
         });
       }
 
+      /* ─── ANIMATED SKILL BARS & PERCENTAGES ───────── */
+      function initSkillBars() {
+        const grid = document.getElementById('bars-grid');
+        if (!grid) return;
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const items = grid.querySelectorAll('.sb-item');
+            items.forEach((item, idx) => {
+              const fill = item.querySelector('.sb-fill');
+              const pctEl = item.querySelector('.sb-pct');
+              const target = parseInt(pctEl?.dataset.target || fill?.dataset.w || '0', 10);
+
+              setTimeout(() => {
+                if (fill) fill.style.width = target + '%';
+                if (pctEl) {
+                  let start = 0;
+                  const duration = 2200;
+                  const startTime = performance.now();
+                  function step(now) {
+                    const elapsed = now - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    // Smooth easeOutCubic curve for text counting
+                    const easeProgress = 1 - Math.pow(1 - progress, 3);
+                    const current = Math.floor(start + (target - start) * easeProgress);
+                    pctEl.textContent = current + '%';
+                    if (progress < 1) requestAnimationFrame(step);
+                  }
+                  requestAnimationFrame(step);
+                }
+              }, idx * 180);
+            });
+            obs.unobserve(entry.target);
+          });
+        }, { threshold: 0.2 });
+
+        obs.observe(grid);
+      }
+      initSkillBars();
+
+      /* ─── ANIMATED STAT COUNTERS ──────────────────── */
+      function initCounters() {
+        const counters = document.querySelectorAll('.counter-val');
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+            const target = parseFloat(el.dataset.target || '0');
+            const decimals = parseInt(el.dataset.decimals || '0');
+            const suffix = el.dataset.suffix || '';
+            let start = 0;
+            const duration = 1600;
+            const startTime = performance.now();
+
+            function step(now) {
+              const elapsed = now - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+              const current = start + (target - start) * progress;
+              el.textContent = current.toFixed(decimals) + suffix;
+              if (progress < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+            obs.unobserve(el);
+          });
+        }, { threshold: 0.2 });
+
+        counters.forEach(c => obs.observe(c));
+      }
+      initCounters();
+
+      /* ─── HERO NEURAL CANVAS ──────────────────────── */
+      function initNeuralCanvas() {
+        const canvas = document.getElementById('hero-neural-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let w, h;
+        let mouse = { x: null, y: null };
+
+        function resize() {
+          w = canvas.width = canvas.offsetWidth;
+          h = canvas.height = canvas.offsetHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize, { passive: true });
+
+        const heroSec = document.getElementById('hero');
+        if (heroSec) {
+          heroSec.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
+          }, { passive: true });
+
+          heroSec.addEventListener('mouseleave', () => {
+            mouse.x = null;
+            mouse.y = null;
+          });
+        }
+
+        const particles = [];
+        const count = 35;
+        for (let i = 0; i < count; i++) {
+          particles.push({
+            x: Math.random() * (w || 600),
+            y: Math.random() * (h || 600),
+            vx: (Math.random() - 0.5) * 0.5,
+            vy: (Math.random() - 0.5) * 0.5,
+            r: Math.random() * 2 + 1
+          });
+        }
+
+        function draw() {
+          if (!w || !h) { requestAnimationFrame(draw); return; }
+          ctx.clearRect(0, 0, w, h);
+          ctx.fillStyle = 'rgba(16, 185, 129, 0.6)';
+          ctx.strokeStyle = 'rgba(16, 185, 129, 0.12)';
+
+          particles.forEach((p, i) => {
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < 0 || p.x > w) p.vx *= -1;
+            if (p.y < 0 || p.y > h) p.vy *= -1;
+
+            if (mouse.x !== null) {
+              const dx = mouse.x - p.x;
+              const dy = mouse.y - p.y;
+              const dist = Math.sqrt(dx * dx + dy * dy);
+              if (dist < 120) {
+                p.x += dx * 0.01;
+                p.y += dy * 0.01;
+              }
+            }
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fill();
+
+            for (let j = i + 1; j < particles.length; j++) {
+              const p2 = particles[j];
+              const dx = p.x - p2.x;
+              const dy = p.y - p2.y;
+              const dist = Math.sqrt(dx * dx + dy * dy);
+              if (dist < 110) {
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.stroke();
+              }
+            }
+          });
+
+          requestAnimationFrame(draw);
+        }
+        draw();
+      }
+      initNeuralCanvas();
+
+      /* ─── COMMAND PALETTE CONTROLLER ──────────────── */
+      window.toggleCmdPalette = function (open) {
+        const p = document.getElementById('cmd-palette');
+        const inp = document.getElementById('cmd-input');
+        if (!p) return;
+        const isOpened = p.classList.contains('open');
+        const should = open !== undefined ? open : !isOpened;
+        if (should) {
+          p.classList.add('open');
+          p.setAttribute('aria-hidden', 'false');
+          if (inp) {
+            inp.value = '';
+            filterCmdItems('');
+          }
+          setTimeout(() => inp?.focus(), 100);
+        } else {
+          p.classList.remove('open');
+          p.setAttribute('aria-hidden', 'true');
+        }
+      };
+
+      document.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+          e.preventDefault();
+          window.toggleCmdPalette();
+        } else if (e.key === 'Escape') {
+          window.toggleCmdPalette(false);
+        }
+      });
+
+      window.execCmd = function (action) {
+        window.toggleCmdPalette(false);
+        if (action === 'work') {
+          document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+        } else if (action === 'matchmaker') {
+          document.getElementById('matchmaker')?.scrollIntoView({ behavior: 'smooth' });
+        } else if (action === 'chat') {
+          toggleChat(true);
+        } else if (action === 'resume') {
+          window.open('https://drive.google.com/file/d/1RaqnSL5dM6kBbuYRTY_Lu6Vy8oKMUeL/view?usp=sharing', '_blank');
+        } else if (action === 'theme') {
+          themeBtn?.click();
+        } else if (action === 'email') {
+          navigator.clipboard.writeText('patilratish369@gmail.com');
+          alert('Email copied to clipboard!');
+        }
+      };
+
+      // ── FUZZY FILTER ──────────────────────────────────────────────
+      function getVisibleItems() {
+        return Array.from(document.querySelectorAll('#cmd-list .cmd-item'))
+          .filter(i => i.style.display !== 'none');
+      }
+
+      function filterCmdItems(query) {
+        const val = (query || '').toLowerCase().trim();
+        let visibleCount = 0;
+        document.querySelectorAll('#cmd-list .cmd-item').forEach(item => {
+          const txt = (item.textContent || '').toLowerCase();
+          const kw  = (item.dataset.keywords || '').toLowerCase();
+          const act = (item.dataset.action  || '').toLowerCase();
+          const hit = !val || txt.includes(val) || kw.includes(val) || act.includes(val);
+          item.style.display = hit ? 'flex' : 'none';
+          if (hit) visibleCount++;
+        });
+        const no = document.getElementById('cmd-no-results');
+        if (no) no.style.display = visibleCount === 0 ? 'block' : 'none';
+      }
+
+      // ── KEYBOARD CONTROLLER ───────────────────────────────────────
+      const cmdInput = document.getElementById('cmd-input');
+      if (cmdInput) {
+        cmdInput.addEventListener('input', e => filterCmdItems(e.target.value));
+
+        cmdInput.addEventListener('keydown', e => {
+          const items = getVisibleItems();
+          if (!items.length) return;
+
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            items[0].focus();
+          } else if (e.key === 'Tab' && !e.shiftKey) {
+            e.preventDefault();            // stop browser stealing Tab
+            items[0].focus();
+          } else if (e.key === 'Tab' && e.shiftKey) {
+            e.preventDefault();
+            items[items.length - 1].focus();
+          } else if (e.key === 'Enter') {
+            e.preventDefault();
+            const act = items[0].dataset.action;
+            if (act) window.execCmd(act);
+          }
+        });
+      }
+
+      // Trap focus inside the list — never escape to browser chrome
+      const cmdListEl = document.getElementById('cmd-list');
+      if (cmdListEl) {
+        cmdListEl.addEventListener('keydown', e => {
+          const items = getVisibleItems();
+          const idx   = items.indexOf(document.activeElement);
+          if (idx === -1) return;
+
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            // wrap-around: last item → back to first
+            items[(idx + 1) % items.length].focus();
+
+          } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (idx === 0) {
+              cmdInput?.focus();           // top → back to search box
+            } else {
+              items[idx - 1].focus();
+            }
+
+          } else if (e.key === 'Tab' && !e.shiftKey) {
+            e.preventDefault();
+            if (idx === items.length - 1) {
+              cmdInput?.focus();           // last item Tab → wrap to input
+            } else {
+              items[idx + 1].focus();
+            }
+
+          } else if (e.key === 'Tab' && e.shiftKey) {
+            e.preventDefault();
+            if (idx === 0) {
+              cmdInput?.focus();           // first item Shift+Tab → back to input
+            } else {
+              items[idx - 1].focus();
+            }
+
+          } else if (e.key === 'Enter') {
+            e.preventDefault();
+            const act = items[idx].dataset.action;
+            if (act) window.execCmd(act);
+
+          } else if (e.key === 'Escape') {
+            e.preventDefault();
+            window.toggleCmdPalette(false);
+
+          } else {
+            // Any printable character: redirect typing back to search input
+            if (e.key.length === 1 && !e.ctrlKey && !e.metaKey) {
+              cmdInput?.focus();
+            }
+          }
+        });
+      }
+
+      window.insertSampleJD = function () {
+        const samples = [
+          "Seeking an AI / ML Engineer proficient in PyTorch, YOLOv8, computer vision, and FastAPI. Experience with RAG workflows and model deployment is required.",
+          "Looking for a Full-Stack AI Engineer with React, Node.js, LLM integration (Gemini API / OpenAI), and real-time telemetry pipelines.",
+          "Hiring an Edge AI Engineer with Raspberry Pi, OpenCV, local LLM deployment (Ollama / TinyLlama), and Firebase integration experience."
+        ];
+        const inp = document.getElementById('matchmaker-input');
+        if (inp) {
+          const idx = Math.floor(Math.random() * samples.length);
+          inp.value = samples[idx];
+          inp.focus();
+        }
+      };
+
+      window.clearMatchmakerJD = function () {
+        const inp = document.getElementById('matchmaker-input');
+        if (inp) {
+          inp.value = '';
+          inp.focus();
+        }
+      };
+
+      /* ─── 3D CARD FLIP CONTROLLER ─────────────────── */
+      window.flipCard = function (btn) {
+        const inner = btn.closest('.card-flip-inner');
+        if (inner) inner.classList.toggle('flipped');
+      };
+
+      /* ─── AI RECRUITER MATCHMAKER HANDLER ─────────── */
+      window.handleMatchmakerSubmit = async function (e) {
+        e.preventDefault();
+        const text = document.getElementById('matchmaker-input')?.value || '';
+        const btn = document.getElementById('matchmaker-btn');
+        const resBox = document.getElementById('matchmaker-result');
+        if (!text.trim()) return;
+
+        if (btn) btn.disabled = true;
+        if (btn) btn.innerHTML = '<span>Evaluating Match... ⚡</span>';
+
+        try {
+          const resp = await fetch('/api/matchmaker', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ jobDescription: text })
+          });
+          const data = await resp.json();
+          if (btn) { btn.disabled = false; btn.innerHTML = '<span>Analyze Match ⚡</span>'; }
+
+          if (resBox) {
+            resBox.style.display = 'block';
+            document.getElementById('match-pct').textContent = (data.matchPercentage || 92) + '%';
+            document.getElementById('match-headline').textContent = data.headline || 'Strong technical compatibility identified';
+            document.getElementById('match-summary').textContent = data.summary || '';
+
+            const skillsBox = document.getElementById('match-skills');
+            if (skillsBox && Array.isArray(data.matchingSkills)) {
+              skillsBox.innerHTML = data.matchingSkills.map(s => `<span class="ctag">${escapeHtml(s)}</span>`).join('');
+            }
+          }
+        } catch (err) {
+          if (btn) { btn.disabled = false; btn.innerHTML = '<span>Analyze Match ⚡</span>'; }
+          alert('Matchmaker temporarily busy. Please try again.');
+        }
+      };
+
     })();
   </script>
+
+  <!-- ════════════════════════════════════
+     COMMAND PALETTE MODAL
+════════════════════════════════════ -->
+  <div id="cmd-palette" class="cmd-palette-backdrop" aria-hidden="true"
+    onclick="if(event.target===this) toggleCmdPalette(false)">
+    <div class="cmd-palette-box">
+      <div class="cmd-input-row">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+        <input type="text" id="cmd-input" class="cmd-input"
+          placeholder="Type a command or search... (Tab to select, Esc to close)" autocomplete="off" />
+      </div>
+      <div class="cmd-list" id="cmd-list">
+        <div class="cmd-item" tabindex="0" data-action="work"
+          data-keywords="work projects built portfolio krishisetu smart sight review insight iot selected"
+          onclick="execCmd('work')">
+          <div class="cmd-item-left">📂 <span>Jump to Selected Work / Projects</span></div>
+          <span class="cmd-item-key">Work</span>
+        </div>
+        <div class="cmd-item" tabindex="0" data-action="matchmaker"
+          data-keywords="match matchmaker job description recruiter analyze evaluate ratio candidate alignment"
+          onclick="execCmd('matchmaker')">
+          <div class="cmd-item-left">🎯 <span>Run AI Job Description Matchmaker</span></div>
+          <span class="cmd-item-key">Match</span>
+        </div>
+        <div class="cmd-item" tabindex="0" data-action="chat"
+          data-keywords="chat ai bot assistant ask question ratish llm query" onclick="execCmd('chat')">
+          <div class="cmd-item-left">🤖 <span>Ask Ratish AI Chatbot</span></div>
+          <span class="cmd-item-key">Chat</span>
+        </div>
+        <div class="cmd-item" tabindex="0" data-action="resume"
+          data-keywords="resume cv pdf download view background education skills history experience"
+          onclick="execCmd('resume')">
+          <div class="cmd-item-left">📄 <span>Download / View Resume PDF</span></div>
+          <span class="cmd-item-key">Resume</span>
+        </div>
+        <div class="cmd-item" tabindex="0" data-action="theme"
+          data-keywords="theme dark light mode toggle color style appearance contrast" onclick="execCmd('theme')">
+          <div class="cmd-item-left">🌓 <span>Toggle Dark / Light Mode</span></div>
+          <span class="cmd-item-key">Theme</span>
+        </div>
+        <div class="cmd-item" tabindex="0" data-action="email"
+          data-keywords="email contact touch mail reach send message connect" onclick="execCmd('email')">
+          <div class="cmd-item-left">📧 <span>Copy Contact Email</span></div>
+          <span class="cmd-item-key">Email</span>
+        </div>
+        <div id="cmd-no-results" style="display:none;padding:20px;text-align:center;color:var(--muted);font-size:13px;">
+          No matching actions found. Try searching for "Work", "Matchmaker", "Chat", "Resume", or "Email".
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>
