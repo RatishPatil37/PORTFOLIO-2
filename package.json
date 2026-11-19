@@ -1,0 +1,17 @@
+{
+  "name": "ratish-observatory",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs && vite build",
+    "dev": "node scripts/build.mjs && vite"
+  },
+  "dependencies": {
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
+  },
+  "devDependencies": {
+    "vite": "6.4.1",
+    "typescript": "5.8.3"
+  }
+}

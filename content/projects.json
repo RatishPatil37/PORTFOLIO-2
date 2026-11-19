@@ -1,0 +1,83 @@
+[
+  {
+    "id": "smart-sight",
+    "name": "SmartSight",
+    "category": "Edge vision",
+    "summary": "Smart glasses built around a Raspberry Pi camera. Inspect how a capture moves from the wearable to a cloud archive.",
+    "url": "https://github.com/RatishPatil37/SmartSight",
+    "image": "Smart_Sight_Front.webp",
+    "skills": [
+      "Raspberry Pi",
+      "Computer vision",
+      "Python"
+    ],
+    "steps": [
+      [
+        "Capture",
+        "A browser on the local network triggers the camera through Flask. Keeping controls in the browser lets a phone operate the device."
+      ],
+      [
+        "Encode",
+        "Still images can upload directly. Video passes through FFmpeg so the result plays on phones and desktops."
+      ],
+      [
+        "Archive",
+        "Rclone transfers the file to OneDrive. The documented cleanup step waits for a successful upload before reclaiming local space."
+      ]
+    ]
+  },
+  {
+    "id": "prakriti",
+    "name": "Prakriti AI",
+    "category": "Environmental intelligence",
+    "summary": "A biodiversity research assistant that retrieves environmental evidence and traces the sources behind an answer.",
+    "url": "https://github.com/RatishPatil37/Prakriti-AI",
+    "image": "",
+    "skills": [
+      "Retrieval",
+      "Python",
+      "Qdrant"
+    ],
+    "steps": [
+      [
+        "Retrieve",
+        "Qdrant combines lexical and semantic retrieval. Exact species names and questions phrased in ordinary language can both contribute candidates."
+      ],
+      [
+        "Rank",
+        "Reciprocal rank fusion combines result rankings before generation. This introduces a retrieval stage that can be inspected separately."
+      ],
+      [
+        "Cite",
+        "The documented citation gate checks the response after generation. Source coverage still depends on the indexed collection."
+      ]
+    ]
+  },
+  {
+    "id": "krishisetu",
+    "name": "KrishiSetu",
+    "category": "Agricultural technology",
+    "summary": "A multilingual platform for exploring government schemes, interpreting documents and investigating crop problems.",
+    "url": "https://github.com/RatishPatil37/KRISHISETU",
+    "image": "Krishisetu asset.webp",
+    "skills": [
+      "Computer vision",
+      "Full stack",
+      "Multilingual UI"
+    ],
+    "steps": [
+      [
+        "Select language",
+        "Regional-language navigation gives farmers a familiar entry point to the platform."
+      ],
+      [
+        "Choose a workflow",
+        "Scheme eligibility, document processing and crop diagnostics each collect different inputs."
+      ],
+      [
+        "Inspect a result",
+        "The crop workflow accepts a leaf photograph for analysis. Image quality affects what the system can infer."
+      ]
+    ]
+  }
+]
